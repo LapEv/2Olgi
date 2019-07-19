@@ -9,7 +9,7 @@ header
     position: fixed
     width: 100%
     height: 60px
-    background-color: rgba(80, 137, 223, 0.678)
+    background-color: $main-color
     z-index: 10
     ul
         display: flex
@@ -17,7 +17,7 @@ header
         list-style-type: none
         justify-content: space-around
         align-items: center
-        color: #fff
+        color: $text-color
         font-size: 120%
 .container-header
     position: static
@@ -44,20 +44,23 @@ header
             width: 100%
         &:hover:before
             top: 0
+.hamburger
+	display: none
 .main
-    min-height: 843px
-    width: 100%
-    background: url(../img/mountains.jpg) center center/cover no-repeat
+	position: absolute
+	width: 100%
+	height: 100vh
+	overflow: hidden
+	background: url(../img/mountains.jpg) center center/cover no-repeat
 .container
-    position: fixed
-    width: 100%
-    height: 0%
+    max-width: 840px
+    margin: 0 auto;
     background-color: rgba(0, 0, 0, 0)
     z-index: 10
     &_logo
         display: flex
         width: 840px
-        max-height: 250px
+        height: 250px
         background-color: rgba(0, 0, 0, 0.4)
         margin: 0 auto
         padding: 25px
@@ -65,10 +68,13 @@ header
         text-align: center
     @for $i from 1 through 2
         &_#{$i}{z-index: 2+$i
-        +cont_parametrs
-        @if $i==1 {animation-name: bounceInLeft}
-        @if $i==2 {animation-name: bounceInRight}}
-        &_#{$i}_descr{background: url(../img/Olga#{$i}_2.jpg)
+        position: relative
+        width: 20%
+        @if $i==1 {background: url(../img/Olga#{$i}.jpg) center center/cover no-repeat
+        animation: bounceInLeft 3s}
+        @if $i==2 {background: url(../img/Olga#{$i}.jpg) center center/cover no-repeat
+        animation: bounceInRight 3s}}
+        &_#{$i}_descr{background: url(../img/Olga#{$i}_2.jpg) center center/cover no-repeat
         +cont_descr_parametrs}
         &_#{$i}_info{@if $i==1 {margin-top: 3%}
         @if $i==2 {margin-top: 16%}
@@ -79,21 +85,21 @@ header
       display: inline-block
       position: relative
       height: 100%
+      width: 60%
+      background: url(../img/hearts.jpg) center center/cover no-repeat
       z-index: 5
       &_descr
         display: block
         position: relative
         width: 100%
-        height: 100%
+        height: 20%
         align-items: center
-        margin-top: -182px
+        padding-top: 5px
         font-family: "Jura"
         font-size: 17pt
         font-weight: bold
       &_logo
         display: block
-        width: 100%
-        height: 100%
         align-items: center
         padding-top: 24px
         padding-right: 5px
@@ -109,23 +115,18 @@ header
         &.hidden
           opacity: 1
           li
+            opacity: 0
             &:nth-child(1)
-              opacity: 0
               transform: translateX(110px) translateY(-150px)
             &:nth-child(2)
-              opacity: 0
               transform: translateX(320px) translateY(100px)
             &:nth-child(3)
-              opacity: 0
               transform: translateX(-250px) translateY(-80px)
             &:nth-child(4)
-              opacity: 0
               transform: translateX(-180px) translateY(-180px)
             &:nth-child(5)
-              opacity: 0
               transform: translateX(-200px) translateY(150px)
             &:nth-child(6)
-              opacity: 0
               transform: translateX(100px) translateY(50px)
 @keyframes bounceInLeft
     +bncInLeft
@@ -133,3 +134,25 @@ header
     +bncInRight
 @keyframes rubberBand
     +rbbrBand
+.container
+	&_regression
+		// width: 20%
+		// height: 20%
+		&_img
+			float: left
+			width: 20%
+			height: 30%
+			margin-right: 20px
+			background: url(../img/regression.jpg) center center/cover no-repeat
+	&_general
+		display: flex
+		width: 840px
+		height: 100%
+		background-color: rgba(0,0,0,0.4)
+		margin: 0 auto
+		padding: 25px
+		margin-top: 20px
+		text-align: justify;
+		color: white
+		h3
+			text-align: center

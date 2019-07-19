@@ -1,0 +1,180 @@
+@media (max-width: 991px)
+    .container
+        &_logo, &_general
+            width: 737px
+            height: 220px
+        &_main
+            &_descr
+                font-size: 15pt
+            &_logo
+                li
+                    font-size: 42pt
+        @for $i from 1 through 2
+            &_#{$i}_descr{padding-top: 90px
+            font-size: 11pt}
+            &_#{$i}_info{padding: 6px 12px
+            font-size: 7pt}
+@media (max-width: 767px)
+    header
+        ul
+            font-size: 100%
+    .container
+        &_logo, &_general
+            width: 544px
+            height: 160px
+            padding: 15px
+        &_main
+            &_descr
+                font-size: 12pt
+            &_logo
+                padding-top: 10px
+                li
+                    font-size: 34pt
+        @for $i from 1 through 2
+            &_#{$i}_descr{padding-top: 68px
+            font-size: 8pt}
+            &_#{$i}_info{padding: 4px 8px
+            font-size: 5pt}
+@media (max-width: 767px) and (orientation: landscape)
+    header
+        height: 40px
+        padding: 0 50px
+    .menu
+        ul
+            font-size: 90%
+            height: 40px
+    .container
+        margin: -28px auto
+@media (max-height: 412px) and (orientation: landscape)
+    header
+        height: 40px
+        padding: 0 65px
+    .menu
+        ul
+            font-size: 90%
+            height: 40px
+    .container
+        margin: -30px auto
+        &_logo, &_general
+            width: 544px
+            height: 160px
+            padding: 15px
+        &_main
+            &_descr
+                font-size: 12pt
+            &_logo
+                padding-top: 10px
+                li
+                    font-size: 34pt
+        @for $i from 1 through 2
+            &_#{$i}_descr{padding-top: 68px
+            font-size: 8pt}
+            &_#{$i}_info{padding: 4px 8px
+            font-size: 5pt}
+@media (max-width: 575px)
+    header
+        height: 45px
+    .container
+        margin: -25px auto
+        &_logo, &_general
+            width: 355px
+            height: 105px
+            padding: 10px
+        &_main
+            &_descr
+                font-size: 8pt
+            &_logo
+                padding-top: 10px
+                li
+                    font-size: 22pt
+        @for $i from 1 through 2
+            &_#{$i}_descr{padding-top: 42px
+            font-size: 5.5pt}
+            &_#{$i}_info{padding: 3px 7px
+            font-size: 4pt}
+@media (max-width: 575px) and (orientation: portrait)
+    .menu
+        ul
+            position: fixed
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: flex-start
+            top: 0
+            left: -100%
+            height: 100vh
+            width: 80%
+            font-size: 130%
+            padding: 15px 15px
+            background-color: $main-color
+            transition: 0.6s all
+            li
+                padding: 25px
+                &:hover:after, &:hover:before
+                    content: none
+            @for $i from 1 through 5 
+                li
+                    &:nth-child(#{$i})
+                        a
+                            &:active
+                                transition: all 1s ease
+                                font-size: 160%
+                                letter-spacing: 4px
+        &_active
+            ul
+                left: 0
+    .hamburger
+        display: flex
+        align-items: flex-start
+        justify-content: flex-start
+        padding-left: 10px
+        overflow: hidden
+        position: absolute
+        width: 100%
+    .ham
+        cursor: pointer
+        transition: transform 400ms
+        user-select: none
+    .hamRotate.active 
+        transform: rotate(45deg)
+    .hamRotate180.active 
+        transform: rotate(180deg)
+    .line
+        fill: none
+        transition: stroke-dasharray 400ms, stroke-dashoffset 400ms
+        stroke: #fff
+        stroke-width: 5.5
+        stroke-linecap: round
+    .ham1 .top 
+        stroke-dasharray: 40 139
+    .ham1 .bottom 
+        stroke-dasharray: 40 180
+    .ham1.active .top 
+        stroke-dashoffset: -98px
+    .ham1.active .bottom 
+        stroke-dashoffset: -138px
+@media (max-width: 359px)
+    .container
+        margin: -28px auto
+        &_logo, &_general
+            width: 300px
+            height: 83px
+            padding: 5px
+        &_main
+            &_descr
+                font-size: 7pt
+            &_logo
+                padding-top: 10px
+                li
+                    font-size: 19pt
+        @for $i from 1 through 2
+            &_#{$i}_descr{padding-top: 36px
+            font-size: 5pt}
+            &_#{$i}_info{padding: 2px 6px
+            font-size: 4pt}
+   
+
+
+
+
+
