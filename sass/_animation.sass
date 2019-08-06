@@ -1,56 +1,161 @@
 =bncInLeft
-    from,
-    60%,
-    to
-        -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
-        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
-    0%
-        opacity: 0
-        -webkit-transform: translate3d(-3000px, 0, 0)
-        transform: translate3d(-3000px, 0, 0)
-    60%
-        opacity: 1
-        -webkit-transform: translate3d(25px, 0, 0)
-        transform: translate3d(25px, 0, 0)
-    to
-        -webkit-transform: translate3d(0, 0, 0)
-        transform: translate3d(0, 0, 0);
+		from,
+		60%,
+		to
+				-webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+				animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+		0%
+				opacity: 0
+				-webkit-transform: translate3d(-3000px, 0, 0)
+				transform: translate3d(-3000px, 0, 0)
+		60%
+				opacity: 1
+				-webkit-transform: translate3d(25px, 0, 0)
+				transform: translate3d(25px, 0, 0)
+		to
+				-webkit-transform: translate3d(0, 0, 0)
+				transform: translate3d(0, 0, 0)
 =bncInRight
-    from,
-    60%,
-    to
-        -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
-        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
-    0%
-        opacity: 0
-        -webkit-transform: translate3d(3000px, 0, 0)
-        transform: translate3d(3000px, 0, 0)
-    60%
-        opacity: 1
-        -webkit-transform: translate3d(-25px, 0, 0)
-        transform: translate3d(-25px, 0, 0)
-    to
-        -webkit-transform: translate3d(0, 0, 0)
-        transform: translate3d(0, 0, 0);
+		from,
+		60%,
+		to
+				-webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+				animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+		0%
+				opacity: 0
+				-webkit-transform: translate3d(3000px, 0, 0)
+				transform: translate3d(3000px, 0, 0)
+		60%
+				opacity: 1
+				-webkit-transform: translate3d(-25px, 0, 0)
+				transform: translate3d(-25px, 0, 0)
+		to
+				-webkit-transform: translate3d(0, 0, 0)
+				transform: translate3d(0, 0, 0);
+=bncInUp
+	from,
+	60%,
+	75%,
+	90%,
+	to 
+		-webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+		animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+	from 
+		opacity: 0
+		-webkit-transform: translate3d(0, 3000px, 0)
+		transform: translate3d(0, 3000px, 0)
+	60% 
+		opacity: 1
+		-webkit-transform: translate3d(0, -20px, 0)
+		transform: translate3d(0, -20px, 0)
+	75% 
+		-webkit-transform: translate3d(0, 10px, 0)
+		transform: translate3d(0, 10px, 0)
+	90% 
+		-webkit-transform: translate3d(0, -5px, 0)
+		transform: translate3d(0, -5px, 0)
+	to 
+		-webkit-transform: translate3d(0, 0, 0)
+		transform: translate3d(0, 0, 0)
 =rbbrBand
-  from
-    -webkit-transform: scale3d(1, 1, 1)
-    transform: scale3d(1, 1, 1)
-  30%
-    -webkit-transform: scale3d(1.25, 0.75, 1)
-    transform: scale3d(1.25, 0.75, 1)
-  40%
-    -webkit-transform: scale3d(0.75, 1.25, 1)
-    transform: scale3d(0.75, 1.25, 1)
-  50%
-    -webkit-transform: scale3d(1.15, 0.85, 1)
-    transform: scale3d(1.15, 0.85, 1)
-  65%
-    -webkit-transform: scale3d(0.95, 1.05, 1)
-    transform: scale3d(0.95, 1.05, 1)
-  75%
-    -webkit-transform: scale3d(1.05, 0.95, 1)
-    transform: scale3d(1.05, 0.95, 1)
-  to
-    -webkit-transform: scale3d(1, 1, 1)
-    transform: scale3d(1, 1, 1);
+	from
+		-webkit-transform: scale3d(1, 1, 1)
+		transform: scale3d(1, 1, 1)
+	30%
+		-webkit-transform: scale3d(1.25, 0.75, 1)
+		transform: scale3d(1.25, 0.75, 1)
+	40%
+		-webkit-transform: scale3d(0.75, 1.25, 1)
+		transform: scale3d(0.75, 1.25, 1)
+	50%
+		-webkit-transform: scale3d(1.15, 0.85, 1)
+		transform: scale3d(1.15, 0.85, 1)
+	65%
+		-webkit-transform: scale3d(0.95, 1.05, 1)
+		transform: scale3d(0.95, 1.05, 1)
+	75%
+		-webkit-transform: scale3d(1.05, 0.95, 1)
+		transform: scale3d(1.05, 0.95, 1)
+	to
+		-webkit-transform: scale3d(1, 1, 1)
+		transform: scale3d(1, 1, 1);
+=movetoCnctLeft
+	from    
+		transform: translateX(0px) translateY(0px)
+	33%
+		transform: translateX(80px) translateY(50px)
+	62%
+		transform: translateX(80px) translateY(75px)
+	75%
+		transform: translateX(80px) translateY(75px)
+	88%
+		border-bottom-right-radius: 70%	
+		border-bottom-left-radius: 40%
+		transform: translateX(80px) translateY(75px)
+	to
+		border-bottom-right-radius: 0%	
+		border-bottom-left-radius: 0%
+		transform: translateX(80px) translateY(50px)			
+=movefromCnctLeft
+	from
+		transform: translateX(80px) translateY(50px)
+		border-bottom-right-radius: 70%	
+		border-bottom-left-radius: 40%
+	12%
+		border-bottom-right-radius: 70%	
+		border-bottom-left-radius: 40%
+		transform: translateX(80px) translateY(75px)
+	25%
+		border-bottom-right-radius: 70%	
+		border-bottom-left-radius: 40%
+		transform: translateX(80px) translateY(75px)
+	38%
+		border-bottom-right-radius: 70%	
+		border-bottom-left-radius: 40%
+		transform: translateX(80px) translateY(75px)
+	66%
+		border-bottom-right-radius: 0%	
+		border-bottom-left-radius: 0%
+		transform: translateX(80px) translateY(50px)
+	to
+		transform: translateX(0px) translateY(0px)			
+=movetoCnctRight
+	from
+		transform: translateX(0px) translateY(0px)
+	33%
+		transform: translateX(-77px) translateY(-50px)
+	62%
+		transform: translateX(-77px) translateY(-25px)
+	75%
+		transform: translateX(-77px) translateY(-25px)
+	88%
+		border-bottom-right-radius: 70%	
+		border-bottom-left-radius: 50%
+		transform: translateX(-77px) translateY(-25px)
+	to
+		transform: translateX(-77px) translateY(-50px)
+		border-bottom-right-radius: 0%	
+		border-bottom-left-radius: 0%
+=movefromCnctRight
+	from
+		transform: translateX(-77px) translateY(-50px)
+		border-bottom-right-radius: 70%	
+		border-bottom-left-radius: 50%
+	12%
+		border-bottom-right-radius: 70%	
+		border-bottom-left-radius: 50%
+		transform: translateX(-77px) translateY(-25px)
+	25%
+		border-bottom-right-radius: 70%	
+		border-bottom-left-radius: 50%
+		transform: translateX(-77px) translateY(-25px)
+	38%
+		border-bottom-right-radius: 70%	
+		border-bottom-left-radius: 50%
+		transform: translateX(-77px) translateY(-25px)
+	66%
+		border-bottom-right-radius: 0%	
+		border-bottom-left-radius: 0%
+		transform: translateX(-77px) translateY(-50px)
+	to
+		transform: translateX(-0px) translateY(0px)			

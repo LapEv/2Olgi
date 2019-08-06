@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,MAAM,AAAC,CACL,OAAO,CAAE,IAAI,CAEQ,AAHvB,AAEE,MAFI,AAEH,OAAO,AAAC,CACP,OAAO,CAAE,KAAK,CAAG",
+    "sources": [
+        "../sass/share.sass"
+    ],
+    "names": [],
+    "file": "share.min.css"
+}

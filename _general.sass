@@ -1,0 +1,136 @@
+*
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+    outline: none
+    font-family: "Roboto Slab"
+    user-select: none
+header
+    position: fixed
+    width: 100%
+    height: 60px
+    background-color: $main-color
+    z-index: 10
+    ul
+        display: flex
+        height: 60px
+        list-style-type: none
+        justify-content: space-around
+        align-items: center
+        color: $text-color
+        font-size: 120%
+.container-header
+    position: static
+    max-width: 960px
+    background-color: rgba(0, 0, 0, 0)
+    margin: 0 auto
+    z-index: 10
+    li
+        a
+            color: inherit
+            text-decoration: none
+        &:after, &:before
+            content: ''
+            display: block
+            position: relative
+            bottom: -4px
+            margin: 0px auto
+            transition: all 280ms ease-in-out
+            width: 0
+        &:hover:after, &:hover:before
+            content: ''
+            border: 0.5px solid #fff
+            transition: width 280ms ease-in-out
+            width: 100%
+        &:hover:before
+            top: 0
+.hamburger
+	display: none
+.main
+	position: absolute
+	width: 100%
+	height: 100vh
+	overflow: hidden
+	background: url(../img/mountains.jpg) center center/cover no-repeat
+.container
+    max-width: 840px
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0)
+    z-index: 10
+    &_logo
+        display: flex
+        width: 840px
+        height: 250px
+        background-color: rgba(0, 0, 0, 0.4)
+        margin: 0 auto
+        padding: 25px
+        margin-top: 80px
+        text-align: center
+    @for $i from 1 through 2
+        &_#{$i}{z-index: 2+$i
+        position: relative
+        width: 20%
+        @if $i==1 {background: url(../img/Olga#{$i}.jpg) center center/cover no-repeat
+        animation: bounceInLeft 3s}
+        @if $i==2 {background: url(../img/Olga#{$i}.jpg) center center/cover no-repeat
+        animation: bounceInRight 3s}}
+        &_#{$i}_descr{background: url(../img/Olga#{$i}_2.jpg) center center/cover no-repeat
+        +cont_descr_parametrs}
+        &_#{$i}_info{@if $i==1 {margin-top: 3%}
+        @if $i==2 {margin-top: 16%}
+        +cont_info_parametrs}
+        &_#{$i}:hover 
+            .container_#{$i}_descr {opacity: 1}
+    &_main
+      display: inline-block
+      position: relative
+      height: 100%
+      width: 60%
+      background: url(../img/hearts.jpg) center center/cover no-repeat
+      z-index: 5
+      &_descr
+        display: block
+        position: relative
+        width: 100%
+        height: 20%
+        align-items: center
+        padding-top: 5px
+        font-family: "Jura"
+        font-size: 17pt
+        font-weight: bold
+      &_logo
+        display: block
+        align-items: center
+        padding-top: 24px
+        padding-right: 5px
+        li
+          display: inline-block
+          list-style-type: none
+          font-family: LogoFonts12
+          font-size: 48pt
+          font-weight: bold
+          letter-spacing: -4px
+          opacity: 1
+          transition: all 2.5s ease
+        &.hidden
+          opacity: 1
+          li
+            opacity: 0
+            &:nth-child(1)
+              transform: translateX(110px) translateY(-150px)
+            &:nth-child(2)
+              transform: translateX(320px) translateY(100px)
+            &:nth-child(3)
+              transform: translateX(-250px) translateY(-80px)
+            &:nth-child(4)
+              transform: translateX(-180px) translateY(-180px)
+            &:nth-child(5)
+              transform: translateX(-200px) translateY(150px)
+            &:nth-child(6)
+              transform: translateX(100px) translateY(50px)
+@keyframes bounceInLeft
+    +bncInLeft
+@keyframes bounceInRight
+    +bncInRight
+@keyframes rubberBand
+    +rbbrBand
