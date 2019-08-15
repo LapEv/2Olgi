@@ -269,4 +269,13 @@ $(document).ready(()=>{
         }
     });
 
+    $(document).click( function(event){
+        if( $(event.target).closest(".share").length  ) 
+          return;
+        if ($('.footer_share').hasClass('active'))
+        {$('.footer_share').addClass('active_no');
+        $('.footer_share').removeClass('active');return;}
+        event.stopPropagation();
+      });
+      
 });

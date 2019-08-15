@@ -1,0 +1,49 @@
+.share-icons
+  list-style: none
+  margin: 15px
+  padding: 0
+  display: flex
+  justify-content: center
+  a
+    text-decoration: none
+    width: 40px
+    height: 40px
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 50%
+    z-index: 39
+    margin: 0 6px
+    font-size: 26px
+    overflow: hidden
+    position: relative
+    color: #000
+    border: 2px solid black
+    transition: all 0.2s linear 0s
+    .social_svg
+      fill: black
+      position: absolute
+      width: 80%
+      height: 80%
+      z-index: 40
+    &:after
+      content: ""
+      display: block
+      width: 90%
+      height: 90%
+      top: -110%
+      left: 1px
+      right: 0
+      margin: auto
+      position: absolute
+      background-color: #000
+      border-radius: 50%
+    &:hover
+      &:after
+        content: ""
+        top: 2px
+        border-color: white
+        transition: all 0.2s linear 0s
+      .social_svg
+        fill: white   
+        transition: all 0.2s linear 0s
