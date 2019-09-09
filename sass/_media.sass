@@ -1,180 +1,898 @@
 @media (max-width: 991px)
-    .container
-        &_logo, &_general
-            width: 737px
-            height: 220px
-        &_main
-            &_descr
-                font-size: 15pt
-            &_logo
-                li
-                    font-size: 42pt
-        @for $i from 1 through 2
-            &_#{$i}_descr{padding-top: 90px
-            font-size: 11pt}
-            &_#{$i}_info{padding: 6px 12px
-            font-size: 7pt}
-@media (max-width: 767px)
-    header
-        ul
-            font-size: 100%
-    .container
-        &_logo, &_general
-            width: 544px
-            height: 160px
-            padding: 15px
-        &_main
-            &_descr
-                font-size: 12pt
-            &_logo
-                padding-top: 10px
-                li
-                    font-size: 34pt
-        @for $i from 1 through 2
-            &_#{$i}_descr{padding-top: 68px
-            font-size: 8pt}
-            &_#{$i}_info{padding: 4px 8px
-            font-size: 5pt}
-@media (max-width: 767px) and (orientation: landscape)
-    header
-        height: 40px
-        padding: 0 50px
-    .menu
-        ul
-            font-size: 90%
-            height: 40px
-    .container
-        margin: -28px auto
-@media (max-height: 412px) and (orientation: landscape)
-    header
-        height: 40px
-        padding: 0 65px
-    .menu
-        ul
-            font-size: 90%
-            height: 40px
-    .container
-        margin: -30px auto
-        &_logo, &_general
-            width: 544px
-            height: 160px
-            padding: 15px
-        &_main
-            &_descr
-                font-size: 12pt
-            &_logo
-                padding-top: 10px
-                li
-                    font-size: 34pt
-        @for $i from 1 through 2
-            &_#{$i}_descr{padding-top: 68px
-            font-size: 8pt}
-            &_#{$i}_info{padding: 4px 8px
-            font-size: 5pt}
+	.main
+		.loading_page
+			span
+				font-size: 15pt		
+	.main_container
+		.container
+			&_logo, &_general, &_general_5, &_general_6
+				width: 737px
+			&_main
+				&_descr
+					font-size: 14pt
+				&_logo
+					li
+						font-size: 42pt
+			@for $i from 1 through 2
+				&_#{$i}_descr{padding-top: 90px
+				font-size: 11pt}
+				&_#{$i}_info{padding: 6px 12px
+				font-size: 7pt}
+			&_logo
+				.container_3
+					.delimiter_1, .delimiter_2
+						width: 27px
+					&_descr
+						font-size: 15pt
+					&_logo
+						li
+							font-size: 43pt
+			&_general
+				@for $i from 1 through 4
+					&_#{$i}{width: 737px}
+				@for $i from 1 through 4
+					&_img_#{$i}{width: 275px
+					height: 208px}
+	.article
+		width: 737px
+		&_list, &_menu
+			width: 737px
+		@for $i from 1 through $countarticle
+			&_img_#{$i}{width: 275px
+			height: 208px}
+	.field-block
+		.field
+			font-size: 13px
+			padding: 5px 4px
+	.cross
+		right: 187px
+	.footer
+		&_container 
+			width: 737px
+		&_last_articles
+			width: 54%
+		&_contshare
+			width: 24%
+		&_share
+			&.active	
+				.bubble
+					right: 0px
+			&.active_no	
+				.bubble
+					right: 20px
+					&:before
+						left: 0px
+	.loading
+		top: 30px
+		width: 413px
+		left: 162px
+		height: 523px
+		&_img
+			width: 55%
+			height: 35%
+	.share-icons
+		a
+			&:after
+				height: 90%
+				width: 90%
+				left: 1px
+@media (max-width: 767px)//, (max-width: 991px) and (orientation: landscape)
+	header
+		ul
+			font-size: 100%
+	.main
+		.loading_page
+			span
+				font-size: 13pt		
+	.main_container
+		.container
+			&_logo, &_general, &_general_5, &_general_6
+				width: 544px
+			&_logo
+				height: 180px
+			&_main
+				&_descr
+					font-size: 12pt
+				&_logo
+					padding-top: 10px
+				li
+					font-size: 34pt
+			@for $i from 1 through 2
+				&_#{$i}_descr{padding-top: 68px
+				font-size: 8pt}
+				&_#{$i}_info{padding: 11px 8px
+				font-size: 6pt}
+			&_logo
+				.container_3
+					.delimiter_1, .delimiter_2
+						width: 18px
+					.delimiter_1
+						left: 10px
+					.delimiter_2
+						right: 9px
+					&_descr
+						font-size: 10pt
+					&_logo
+						li
+							font-size: 30pt
+			&_general
+				@for $i from 1 through 4
+					&_#{$i}{width: 544px}
+				@for $i from 1 through 4
+					&_img_#{$i}{width: 220px
+					height: 160px}
+					&_text_#{$i}{font-size: 9pt}
+				h3, p
+					font-size: 11pt
+				&_4
+					font-size: 9pt
+					h3, a
+						font-size: 11pt
+				&_5
+					min-height: 230px
+					a
+						font-size: 7pt	
+					img
+						width: 25px
+						height: 25px
+						margin: 7px 10px
+					p
+						font-size: 10pt
+					.social
+						padding-left: 5px
+					.social_group_items 
+						padding-left: 20px
+					.contact_2_logo
+						li
+							padding-top: 15px
+					.box_shadow_1, .box_shadow_3
+						box-shadow: 0px 0px 15px 12px #000
+					&.active
+						.box_shadow_1, .box_shadow_3
+							transition: box-shadow 1.5s ease 1.8s
+							box-shadow: 0px 0px 15px 12px rgba(58,158,255,0.9)
+						.box_shadow_3
+							transition: box-shadow 1.5s ease 1.8s
+							box-shadow: 0px 0px 15px 12px rgba(255,86,81,0.9)
+		&.general_five
+			.container
+				&_logo
+					height: 220px
+					transition: height 1s	
+				&_1_descr
+					padding-top: 110px
+				&_2_descr
+					padding-top: 80px
+					font-size: 10pt
+			.contact_2_logo
+				li	
+					font-size: 40pt	
+					transition: all 2s ease	2s
+		&.general_five_no
+			.container
+				&_logo
+					height: 180px
+					transition: height 1s 2s		
+			.contact_2_logo
+				li	
+					font-size: 0pt
+					transition: all 2s ease
+	.article
+		width: 544px
+		&_list, &_menu
+			width: 544px
+		@for $i from 1 through $countarticle
+			&_img_#{$i}{width: 220px
+			height: 180px}
+	.container_form
+		max-width: 70%
+		margin: 0 auto
+		padding: 15px 15px
+		h2
+			font-size: 12pt
+			&.cross
+				font-size: 15pt
+	.field-block
+		.field
+			font-size: 13px
+			padding: 5px 4px
+	.cross
+		right: 120px
+		top: 30px
+	.field-block
+		margin-bottom: 5px
+		font-size: 10pt
+		.field
+			font-size: 11px
+			padding: 3px 3px
+	.slct
+		span
+			font-size: 20pt
+	.drop
+		li
+			span
+				font-size: 20pt
+	.button
+		font-size: 12px
+		padding: 3px 8px
+	.loading
+		top: 25px
+		width: 346px
+		left: 99px
+		height: 435px
+		&_img
+			width: 45%
+			height: 30%
+	.footer
+		height: 80px
+		&_container 
+			width: 544px
+		&_logo
+			height: 40px
+			li
+				font-size: 29pt
+		&_copyright
+			img
+				width: 15px
+				height: 15px
+		&_last_articles
+			font-size: 10pt
+			width: 48%
+		&_contshare
+			width: 30%
+		.social_items
+			img
+				width: 20px
+				height: 20px
+				margin: 6px
+		&_share
+			&.active  
+				.bubble
+					width: 400px
+					height: 60px
+					bottom: 72px
+					&:before
+						left: 350px
+			&.active_no 
+				.bubble
+					bottom: 72px
+		.share-icons
+			a
+				width: 35px
+				height: 35px
+				&:after
+					height: 87%
+					width: 90%
+					left: 0px
+			.social_svg
+				width: 65%
+				height: 65%
 @media (max-width: 575px)
-    header
-        height: 45px
-    .container
-        margin: -25px auto
-        &_logo, &_general
-            width: 355px
-            height: 105px
-            padding: 10px
-        &_main
-            &_descr
-                font-size: 8pt
-            &_logo
-                padding-top: 10px
-                li
-                    font-size: 22pt
-        @for $i from 1 through 2
-            &_#{$i}_descr{padding-top: 42px
-            font-size: 5.5pt}
-            &_#{$i}_info{padding: 3px 7px
-            font-size: 4pt}
-@media (max-width: 575px) and (orientation: portrait)
-    .menu
-        ul
-            position: fixed
-            display: flex
-            flex-direction: column
-            justify-content: center
-            align-items: flex-start
-            top: 0
-            left: -100%
-            height: 100vh
-            width: 80%
-            font-size: 130%
-            padding: 15px 15px
-            background-color: $main-color
-            transition: 0.6s all
-            li
-                padding: 25px
-                &:hover:after, &:hover:before
-                    content: none
-            @for $i from 1 through 5 
-                li
-                    &:nth-child(#{$i})
-                        a
-                            &:active
-                                transition: all 1s ease
-                                font-size: 160%
-                                letter-spacing: 4px
-        &_active
-            ul
-                left: 0
-    .hamburger
-        display: flex
-        align-items: flex-start
-        justify-content: flex-start
-        padding-left: 10px
-        overflow: hidden
-        position: absolute
-        width: 100%
-    .ham
-        cursor: pointer
-        transition: transform 400ms
-        user-select: none
-    .hamRotate.active 
-        transform: rotate(45deg)
-    .hamRotate180.active 
-        transform: rotate(180deg)
-    .line
-        fill: none
-        transition: stroke-dasharray 400ms, stroke-dashoffset 400ms
-        stroke: #fff
-        stroke-width: 5.5
-        stroke-linecap: round
-    .ham1 .top 
-        stroke-dasharray: 40 139
-    .ham1 .bottom 
-        stroke-dasharray: 40 180
-    .ham1.active .top 
-        stroke-dashoffset: -98px
-    .ham1.active .bottom 
-        stroke-dashoffset: -138px
+	header
+		height: 53px
+	.menu
+		ul
+			position: fixed
+			display: flex
+			flex-direction: column
+			justify-content: center
+			align-items: flex-start
+			top: 0
+			left: -100%
+			height: 100vh
+			width: 80%
+			font-size: 130%
+			padding: 15px 15px
+			background-color: $main-color
+			transition: 0.6s all
+			li
+				padding: 25px
+				&:hover:after, &:hover:before
+					content: none
+			@for $i from 1 through 5 
+				li
+					&:nth-child(#{$i})
+						a
+							&:active
+								transition: all 1s ease
+								font-size: 160%
+								letter-spacing: 4px
+		&_active
+			ul
+				left: 0
+	.hamburger
+		display: flex
+		align-items: flex-start
+		justify-content: flex-start
+		padding-left: 10px
+		overflow: hidden
+		position: absolute
+		width: 100%
+	.ham
+		cursor: pointer
+		transition: transform 400ms
+		user-select: none
+	.hamRotate.active 
+		transform: rotate(45deg)
+	.hamRotate180.active 
+		transform: rotate(180deg)
+	.line
+		fill: none
+		transition: stroke-dasharray 400ms, stroke-dashoffset 400ms
+		stroke: #fff
+		stroke-width: 5.5
+		stroke-linecap: round
+	.ham1 .top 
+		stroke-dasharray: 40 139
+	.ham1 .bottom 
+		stroke-dasharray: 40 180
+	.ham1.active .top 
+		stroke-dashoffset: -98px
+	.ham1.active .bottom 
+		stroke-dashoffset: -138px
+	.main
+		.loading_page
+			span
+				font-size: 12pt		
+	.main_container
+		.container
+			&_logo, &_general, &_general_5, &_general_6
+				width: 460px
+			&_logo, &_general_5, &_general_6
+				height: 150px
+				padding: 15px
+			&_logo
+				margin: 75px auto 0px auto
+			@for $i from 1 through 2
+				&_#{$i}{width: 25%}
+			&_3
+				width: 50%
+			&_main
+				&_descr
+					font-size: 12pt
+				&_logo
+					padding-top: 10px
+				li
+					font-size: 34pt
+			@for $i from 1 through 2
+				&_#{$i}_descr{padding-top: 60px
+				font-size: 9pt
+				@if ($i == 1){font-size: 8pt}}
+				&_#{$i}_info{padding: 6px 6px
+				margin-top: 5px
+				font-size: 7pt
+				@if ($i == 2){margin-top: 17px}}
+			&_logo
+				.container_3
+					&_descr
+						font-size: 8pt
+					&_logo
+						padding-right: 10px
+						li
+							font-size: 28pt
+					.delimiter_2
+						right: 8px
+			&_general
+				@for $i from 1 through 4
+					&_#{$i}{width: 460px
+					@if ($i != 4){padding: 15px}}
+					&_img_#{$i}{width: 176px
+					height: 128px
+					margin-right: 15px}
+					&_text_#{$i}{font-size: 8.5pt}
+				h3, p
+					font-size: 10pt
+				&_4
+					font-size: 9pt
+					h3, a
+						font-size: 10pt
+				&_5
+					min-height: 230px
+					margin: 0 auto 
+					.contact
+					@for $i from 1 through 3
+						.contact_#{$i}{width: 35%
+						margin-top: 0px
+						@if ($i == 2){width: 40%}}
+					a
+						font-size: 6pt	
+					img
+						width: 20px
+						height: 20px
+						margin: 10px 7px
+					p
+						font-size: 8pt
+					.social_group_items 
+						padding-left: 20px
+					.contact_2_logo
+						li
+							padding-top: 15px
+					.box_shadow_1, .box_shadow_3
+						box-shadow: 0px 0px 15px 8px #000
+					&.active
+						.box_shadow_1, .box_shadow_3
+							transition: box-shadow 1.5s ease 1.8s
+							box-shadow: 0px 0px 15px 8px rgba(58,158,255,0.9)
+						.box_shadow_3
+							transition: box-shadow 1.5s ease 1.8s
+							box-shadow: 0px 0px 15px 8px rgba(255,86,81,0.9)
+		&.general_five
+			.container
+				&_logo
+					height: 180px
+					transition: height 1s
+				&_3
+					width: 40%
+					.delimiter_1
+						animation: movetoContactLeftMobile 3s ease
+						transform: translateX(0px) translateY(0px)			
+					.delimiter_2
+						animation: movetoContactRightMobile 3s ease
+						transform: translateX(0px) translateY(0px)
+					&_logo
+						padding-right: 10px
+				@for $i from 1 through 2
+					&_#{$i}{width: 35%}
+					&_#{$i}_descr{padding-top: 90px
+					font-size: 9pt
+					@if ($i == 1){font-size: 8pt}}
+					&_#{$i}_info{padding: 11px 11px
+					font-size: 7pt}	
+			.contact_2_logo
+				li	
+					font-size: 28pt	
+					transition: all 2s ease	2s
+					padding-top: 30px
+		&.general_five_no
+			.container
+				&_logo
+					height: 150px
+					transition: height 1s 2s
+				&_3
+					width: 50%
+					.delimiter_1
+						animation: movefromContactLeftMobile 3s ease
+						transform: translateX(0px) translateY(0px)			
+					.delimiter_2
+						animation: movefromContactRightMobile 3s ease
+						transform: translateX(0px) translateY(0px)
+				@for $i from 1 through 2
+					&_#{$i}{width: 25%}
+					&_#{$i}_descr{padding-top: 60px
+					font-size: 9pt
+					@if ($i == 1){font-size: 8pt}}
+					&_#{$i}_info{padding: 6px 6px
+					margin-top: 5px
+					font-size: 7pt
+					@if ($i == 2){margin-top: 17px}}
+			.contact_2_logo
+				li	
+					font-size: 0pt
+					transition: all 2s ease
+	.article
+		width: 460px
+		padding: 15px
+		&_list, &_menu
+			width: 460px
+			padding: 10px
+		&_menu
+			font-size: 8.5pt
+		@for $i from 1 through $countarticle
+			&_img_#{$i}{width: 176px
+			height: 128px}
+			&_text_#{$i}{font-size: 8.5pt}
+	.container_form
+		max-width: 80%
+		margin: 0 auto
+		h2
+			font-size: 11pt
+	.cross
+		right: 80px
+		top: 20px
+	.field-block
+		label
+			font-size: 9pt
+	.check-text
+		font-size: 9pt
+	.button
+		margin-bottom: 0px
+		margin-top: 8px
+	.loading
+		top: 15px
+		width: 344px
+		left: 58px
+		height: 430px
+	.footer
+		&_container 
+			width: 460px
+			li
+				font-size: 26pt
+		&_copyright
+			p
+				font-size: 6pt
+			img
+				margin: 2px
+		&_last_articles
+			width: 51%
+			span
+				margin: 10px 0 0px 0
+		&_contshare
+			width: 27%
+		&_contacts
+			flex-wrap: wrap
+		.social_items
+			img
+				margin: 8px
+		&_share
+			&.active  
+				.bubble
+					bottom: 69px
+					right: 24px
+					z-index: 51
+					&:before
+						border: 20px solid
+						border-color: #330867 transparent transparent #330867
+						transition: left 1.5s ease 0.8s, border 0.3s linear
+						left: 345px
+						bottom: -39px
+			&.active_no 
+				.bubble
+					width: 40px
+					right: 39px
+					bottom: 69px
+					z-index: 51
+					&:before
+						border: 0px solid
+						border-color: #330867 transparent transparent #330867
+						transition: left 1.5s ease 0.3s, border 0.3s linear 2.3s
+						left: 0px
+						bottom: -39px
+		.share-icons
+			a
+				width: 35px
+				height: 35px
+@media (max-width: 480px)				
+	.main
+		.loading_page
+			span
+				font-size: 11pt		
+	.main_container
+		.container
+			&_logo, &_general, &_general_5, &_general_6
+				width: 390px
+			&_logo
+				.container_3
+					&_descr
+						font-size: 10.2pt
+			&_general
+				@for $i from 1 through 4
+					&_#{$i}{width: 390px}
+					&_img_#{$i}{width: 140px
+					height: 102px}
+				&_4
+					a
+						font-size: 8.5pt
+				&_5
+					a
+						font-size: 6pt	
+					img
+						width: 18px
+						height: 18px
+						margin: 11px 6px
+					.social
+						padding-left: 0px
+					.social_group_items 
+						padding-left: 8px
+		&.general_five
+			.container
+				&_3_descr
+					font-size: 8pt
+				&_1_descr{font-size: 8pt
+				padding-top: 75px}
+				&_2_info{padding: 6px 6px}				
+				&_2_descr{padding-top: 80px}
+				&_2_info{margin-top: 20px
+				padding: 6px 6px}
+		&.general_five_no
+			.container
+				&_3_descr
+					font-size: 10.2pt
+				&_1_descr{font-size: 7pt}
+	.article
+		width: 390px
+		&_list, &_menu
+			width: 390px
+			padding: 15px
+		@for $i from 1 through $countarticle
+			&_img_#{$i}{width: 140px
+			height: 102px}
+			&_text_#{$i}{font-size: 8.5pt
+			padding-bottom: 15px}
+	.container_form
+		max-width: 80%
+		margin: 0 auto
+		padding: 10px 10px
+		h2
+			font-size: 10pt
+	.cross
+		right: 70px
+		top: 20px
+	.field-block
+		margin-bottom: 1px
+		font-size: 9pt
+		label
+			font-size: 8pt
+			margin-bottom: 2px
+		.select, .drop
+			span
+				font-size: 17pt 
+		.field
+			font-size: 10px
+	.check-text
+		font-size: 9pt
+	.button
+		margin-bottom: 0px
+		margin-top: 8px
+	.loading
+		width: 288px
+		left: 51px
+		height: 349px
+	.footer
+		&_container 
+			width: 390px
+			text-align: center
+			li
+				font-size: 22pt
+		&_last_articles
+			width: 49%
+			font-size: 9pt
+		&_contshare
+			width: 29%
+		&_share
+			&.active  
+				.bubble
+					width: 365px
+					right: 15px
+					&:before
+						left: 305px
+			&.active_no 
+				.bubble
+					right: 35px
+					&:before
+						left: 0px
+		.share-icons
+			a
+				width: 32px
+				height: 32px
+				&:after
+					height: 87%
+					width: 87%
+					left: 1px
+@media (max-width: 400px)				
+	.main
+		.loading_page
+			span
+				font-size: 9pt		
+	.main_container
+		.container
+			&_logo, &_general, &_general_5, &_general_6
+				width: 350px
+			&_logo
+				margin: 65px auto 0px auto
+				.container_3
+					&_descr
+						font-size: 9pt
+			&_1_descr{font-size: 7pt}
+			&_general
+				@for $i from 1 through 4
+					&_#{$i}{width: 350px}
+					&_img_#{$i}{width: 112px
+					height: 82px}
+				&_4
+					a
+						font-size: 7.5pt
+		&.general_five
+			.container
+				&_3_descr
+					font-size: 8pt
+		&.general_five_no
+			.container
+				&_3_descr
+					font-size: 9pt
+	.article
+		width: 350px
+		&_list, &_menu
+			width: 350px
+		&_menu
+			a
+				font-size: 7.5pt
+		@for $i from 1 through $countarticle
+			&_img_#{$i}{width: 112px
+			height: 82px}
+			&_text_#{$i}{font-size: 8.5pt
+			padding-bottom: 15px}
+	.container_form
+		h2
+			font-size: 11pt
+	.cross
+		right: 60px
+	.field-block
+		label
+			font-size: 9pt
+	.check-text
+		font-size: 9pt
+	.button
+		margin-bottom: 0px
+		margin-top: 8px
+	.loading
+		width: 256px
+		left: 47px
+		height: 376px
+	.footer
+		&_container 
+			width: 350px
+			text-align: center
+		&_last_articles
+			width: 46%
+		&_contshare
+			width: 32%
+		&_share
+			&.active  
+				.bubble
+					width: 320px
+					right: 15px
+					&:before
+						left: 261px
+			&.active_no 
+				.bubble
+					right: 34px
+					&:before
+						left: 0px
+		.share-icons
+			margin: 15px
+			a
+				width: 28px
+				height: 28px
+				&:after
+					height: 85%
+					left: 0px
+
 @media (max-width: 359px)
-    .container
-        margin: -28px auto
-        &_logo, &_general
-            width: 300px
-            height: 83px
-            padding: 5px
-        &_main
-            &_descr
-                font-size: 7pt
-            &_logo
-                padding-top: 10px
-                li
-                    font-size: 19pt
-        @for $i from 1 through 2
-            &_#{$i}_descr{padding-top: 36px
-            font-size: 5pt}
-            &_#{$i}_info{padding: 2px 6px
-            font-size: 4pt}
-   
-
-
-
-
+	.main
+		.loading_page
+			span
+				font-size: 8pt		
+	.main_container
+		.container
+			&_logo, &_general, &_general_5, &_general_6
+				width: 300px
+				height: 130px
+				padding: 10px
+			&_logo
+				.container_3
+					&_descr
+						font-size: 8pt
+					.delimiter_1
+						width: 15px
+						left: 8px
+					.delimiter_2
+						width: 15px
+						right: 6px
+					&_logo
+						li
+							font-size: 25pt
+			&_1_descr{font-size: 5pt}
+			&_2_descr{padding-top: 50px
+			font-size: 7pt}
+			&_general
+				padding: 0px
+				margin-top: 15px
+				@for $i from 1 through 3
+					&_#{$i}{width: 300px
+					padding: 10px}
+					&_img_#{$i}{width: 100px
+					height: 74px
+					margin-right: 10px}
+					&_text_#{$i}{font-size: 7.5pt}
+				h3
+					font-size: 9pt
+				&_4
+					a
+						font-size: 7.5pt
+					.article_menu
+						a
+							font-size: 6.5pt
+				&_5
+					min-height: 215px
+		&.general_five
+			.container
+				&_3
+					.delimiter_1
+						animation: movetoContactLeftMobileSE 3s ease
+						transform: translateX(0px) translateY(0px)			
+					.delimiter_2
+						animation: movetoContactRightMobileSE 3s ease
+						transform: translateX(0px) translateY(0px)
+				&_3_descr
+					font-size: 7pt
+				&_1_descr{padding-top: 90px
+				font-size: 6pt}
+				&_2_descr{padding-top: 80px}
+			.contact_2_logo
+				li
+					font-size: 22pt
+					padding-top: 38px
+		&.general_five_no
+			.container
+				&_logo
+					height: 130px
+				&_3
+					.delimiter_1
+						animation: movefromContactLeftMobileSE 3s ease
+						transform: translateX(0px) translateY(0px)			
+					.delimiter_2
+						animation: movefromContactRightMobileSE 3s ease
+						transform: translateX(0px) translateY(0px)
+				&_3_descr
+					font-size: 8pt
+				&_1_descr{font-size: 5pt}
+				&_2_descr{padding-top: 50px
+				font-size: 7pt}
+	.article
+		width: 300px
+		&_list, &_menu
+			width: 300px
+		@for $i from 1 through $countarticle
+			&_img_#{$i}{width: 100px
+			height: 74px}
+			&_text_#{$i}{font-size: 7.5pt
+			padding-bottom: 15px}
+	.container_form
+		max-width: 90%
+		h2
+			font-size: 10pt
+	.cross
+		right: 40px
+		top: 15px
+	.loading
+		width: 252px
+		left: 24px
+		top: 10px
+		height: 376px
+	.footer
+		&_container 
+			width: 300px
+			li
+				font-size: 19pt
+		&_copyright
+			p
+				font-size: 5pt
+		&_last_articles
+			width: 42%
+		&_contshare
+			width: 36%
+		&_share
+			&.active  
+				.bubble
+					width: 280px
+					height: 50px
+					right: 15px
+					&:before
+						left: 224px
+			&.active_no 
+				.bubble
+					right: 34px
+					width: 37px
+					&:before
+						left: 0px
+		.share-icons
+			margin: 13px
+			a
+				width: 24px
+				height: 24px
+				margin: 0px 5px
+				&:after
+					height: 85%
+					width: 88%
+					left: 0px
 

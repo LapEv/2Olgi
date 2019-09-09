@@ -1,0 +1,50 @@
+.custom-scroll_container
+  overflow: hidden !important
+  position: relative
+
+.custom-scroll_inner
+  overflow: scroll
+  -webkit-overflow-scrolling: touch
+  height: 100%
+  position: absolute
+  left: 0
+  right: 0
+  &::-webkit-scrollbar
+    width: 0
+    height: 0
+  -ms-overflow-style: none
+
+.custom-scroll_bar-y, .custom-scroll_bar-x
+  cursor: default
+  position: absolute
+  border-radius: 20px
+  z-index: 1
+  background-image: $bcg-image
+  opacity: .8
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -o-user-select: none
+  user-select: none
+  transition: opacity .2s
+
+.custom-scroll_bar-y
+  top: 0
+  right: 1px
+  width: 15px
+
+.custom-scroll_bar-x
+  left: 0
+  bottom: 1px
+  height: 15px
+
+.custom-scroll_bar-y:hover, .custom-scroll_bar-x:hover
+  opacity: .7
+
+.custom-scroll_bar-y:active, .custom-scroll_bar-x:active
+  opacity: 1
+
+.custom-scroll_hidden-y > .custom-scroll_bar-y, .custom-scroll_hidden-x > .custom-scroll_bar-x
+  opacity: 0
+  visibility: hidden
+  transition: opacity .2s, visibility step-end .3s

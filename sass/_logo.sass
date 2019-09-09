@@ -1,11 +1,18 @@
 .main_container
-		max-width: 840px
+		img
+			flex-shrink: 0
+		max-width: 971px
 		margin: 0 auto
 		background-color: rgba(0,0,0,0)
 		z-index: 10
+		opacity: 0
+		&.active
+			opacity: 1
+			transition: opacity 1s ease
 		.container_logo
 				display: flex
-				width: 840px
+				flex-shrink: 0
+				width: 971px
 				height: 250px
 				background-color: $bcg-color
 				box-shadow: 0 0 17px 7px #000
@@ -17,37 +24,43 @@
 						position: relative
 						width: 30px
 						height: 100%
-						@if ($i==1){top: 200px
-						left: -235px}
-						@if ($i==2){top: -200px
-						left: 237px}
+						z-index: 32
+						@if ($i==1){left: 16px}
+						@if ($i==2){right: 14px}
 		@for $i from 1 through 2
+				.container_#{$i}_blur{opacity: 0
+				transition: opacity 1.5s
+				background-color: #000
+				width: 100%
+				height: 100%}
 				.container_#{$i}{z-index: 2+$i
 				width: 20%
 				position: relative
 				img
 					width: 100%
 					height: 100%
-				@if $i==1 {background: url(../img/Olga#{$i}.jpg) center center/cover no-repeat
-				animation: bounceInLeft 3s}
-				@if $i==2 {background: url(../img/Olga#{$i}.jpg) center center/cover no-repeat
-				animation: bounceInRight 3s}}
-				.container_#{$i}_descr{background: url(../img/Olga#{$i}_2.jpg) center center/cover no-repeat
+				@if $i==1 {background: url(../img/Olga#{$i}.jpg) center center/cover no-repeat}
+				@if $i==2 {background: url(../img/Olga#{$i}.jpg) center center/cover no-repeat	}
+				box-shadow: 0 0 17px 7px #000}
+				.container_#{$i}_descr{top: 0
 				+cont_descr_parametrs}
 				.container_#{$i}_info{@if $i==1 {margin-top: 3%}
 				@if $i==2 {margin-top: 16%}
 				+cont_info_parametrs}
 				.container_#{$i}:hover 
 						.container_#{$i}_descr {opacity: 1}
+						.container_#{$i}_blur {opacity: 0.4
+						transition: opacity 1.5s}
 		.container_3
 			display: flex
-			flex-direction: column
+			flex-direction: row
 			justify-content: center
 			align-items: center
 			position: relative
 			height: 100%
 			width: 60%
 			z-index: 5
+			box-shadow: 0 0 17px 7px #000
 			img
 				width: 100%
 				height: 100%
@@ -93,22 +106,24 @@
 				max-height: 250px
 				@if $i == 3 {width: 40%}
 				&_descr
-					@if $i <= 2 {padding-top: 180px}
+					@if $i <= 2 {padding-top: 180px
+					font-size: 13pt}
+					@if $i == 1 {font-size: 12pt}
 				&_info					
 					@if $i == 2 {margin-top: 3%}}
 			&_3
 				.delimiter_1
 					animation: movetoContactLeft 3s ease
-					transform: translateX(80px) translateY(50px)			
+					transform: translateX(0px) translateY(0px)			
 				.delimiter_2
 					animation: movetoContactRight 3s ease
-					transform: translateX(-77px) translateY(-50px)
+					transform: translateX(0px) translateY(0px)
 				&_descr
 					transition: font-size 1s
-					font-size: 12pt
+					font-size: 13pt
 				&_logo
 					li
-						font-size: 34pt
+						font-size: 40pt
 .main_container
 	&.general_five_no
 		.container

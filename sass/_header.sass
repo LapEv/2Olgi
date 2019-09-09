@@ -13,13 +13,18 @@ header
 				color: $text-color
 				font-size: 120%
 .container-header
-		max-width: 960px
+		max-width: 971px
 		margin: 0 auto
 		z-index: 110
+		opacity: 0
+		&.active
+			opacity: 1
+			transition: opacity 1s ease
 		li
 				a
 						color: inherit
 						text-decoration: none
+						cursor: pointer
 				&:after, &:before
 						content: ''
 						display: block

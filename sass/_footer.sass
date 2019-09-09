@@ -1,3 +1,28 @@
+.bubble
+	z-index: 10
+	cursor: auto
+	position: absolute
+	width: 75px
+	height: 0px
+	bottom: 83px
+	right: 9px
+	text-align: center
+	line-height: 100px
+	background-image: $bcg-image
+	border-bottom-left-radius: 30px
+	border-bottom-right-radius: 30px
+	border-top-left-radius: 30px
+	border-top-right-radius: 30px
+	box-shadow: 0 0 17px 15px #000
+	&:before
+		content: ' '
+		position: absolute
+		width: 0
+		height: 0
+		left: 0px
+		bottom: -28px
+		border: 15px solid
+		border-color: #330867 transparent transparent #330867
 .footer
 	width: 100%
 	height: 84px
@@ -6,19 +31,26 @@
 	color: $text-color
 	&_container
 		display: flex
-		justify-content: space-around
+		justify-content: space-between
 		align-items: center
 		position: relative
-		max-width: 960px
+		max-width: 971px
 		background-color: rgba(0,0,0,0)
 		width: 100%
+		heigh: 100%
 		margin: 0 auto
 		z-index: 10
+		opacity: 0
+		&.active
+			opacity: 1
+			transition: opacity 1s ease
+
 	&_rights
 		display: flex
 		flex-direction: column
 		justify-content: center
 		align-items: flex-start
+		width: 22%
 	&_logo
 		height: 49px
 		li
@@ -40,24 +72,70 @@
 			align-items: center
 			font-size: 8pt
 			text-decoration: none
+	&_last_articles
+		height: 100%
+		cursor: pointer
+		display: flex
+		flex-direction: column
+		justify-content: space-around
+		align-items: center
+		width: 56%
+		z-index: 52
 	&_contacts
 		display: flex
 		justify-content: center
 		align-items: center
 	&_contshare
-		min-width: 248px
-		min-height: 63px
+		width: 22%
 	&_share
-		opacity: 0
 		&.active_no
-			opacity: 0
-			transition: opacity 1s ease
 			cursor: none
+			.bubble
+				height: 0px
+				width: 30px
+				opacity: 0
+				box-shadow: 0 0 0 0 #000
+				border-bottom-left-radius: 0px
+				border-bottom-right-radius: 0px
+				border-top-left-radius: 0px
+				border-top-right-radius: 0px
+				right: 39px
+				transition: height 0.5s linear 1.8s, width 1.5s ease 0.3s, right 1.5s ease 0.3s, border-top-left-radius 1s ease 1.3s, border-top-right-radius 1s ease 1.3s, border-bottom-left-radius 1s ease 1.2s, border-bottom-right-radius 1.5s ease 0.3s, opacity 0.1s ease 2.8s, box-shadow 0.5s linear 1.8s
+				&:before
+					left: 0px
+					border: 0px solid
+					border-color: #330867 transparent transparent #330867
+					transition: left 1.5s ease 0.3s, border 0.3s linear 2.3s
+			.share-icons
+				opacity: 0
+				transition: opacity 0.3s linear	
+				a
+					cursor: default
+					display: none
 		&.active
-			opacity: 1
-			transition: opacity 1s ease
 			cursor: pointer
-		
+			.bubble
+				height: 70px
+				width: 500px
+				opacity: 1
+				box-shadow: 0 0 17px 15px #000
+				border-bottom-left-radius: 30px
+				border-bottom-right-radius: 30px
+				border-top-left-radius: 30px
+				border-top-right-radius: 30px
+				right: 19px
+				transition: height 0.5s linear 0.3s, width 1.5s ease 0.8s, right 1.5s ease 0.8s, border-top-left-radius 1s ease 0.8s, border-top-right-radius 1.5s ease 0.8s, border-bottom-left-radius 0.5s ease 0.8s, border-bottom-right-radius 1.5s ease 0.8s, box-shadow 1s linear 0.3s
+				&:before
+					left: 450px
+					border: 15px solid
+					border-color: #330867 transparent transparent #330867
+					transition: left 1.5s ease 0.8s, border 0.3s linear
+			.share-icons
+				opacity: 1
+				transition: opacity 0.3s linear 2.3s
+				a
+					cursor: pointer
+					display: flex
 .social
 	padding-left: 10px
 .social_items
@@ -69,26 +147,4 @@
 	img
 		width: 25px
 		height: 25px
-		margin: 5px
-.bubble
-	z-index: 10
-	cursor: auto
-	position: absolute
-	width: 500px
-	height: 70px
-	bottom: 91px
-	right: 64px
-	text-align: center
-	line-height: 100px
-	background-image: $bcg-image
-	border-radius: 30px
-	box-shadow: 0 0 17px 7px #000
-	&:before
-		content: ' '
-		position: absolute
-		width: 0
-		height: 0
-		right: 20px
-		top: 68px
-		border: 15px solid
-		border-color: #330867 transparent transparent #330867
+		margin: 7px
