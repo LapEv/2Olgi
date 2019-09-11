@@ -211,6 +211,7 @@ $(document).ready(()=>{
         MenuClick(indActive, lentgh);
         ScrlTop();
         CheckArticleActive();
+        return(true);
     });
 
     function ArticleClick(indActive, lentgh){
