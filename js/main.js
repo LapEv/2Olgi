@@ -10,13 +10,15 @@ window.onload = function(){
         $('.container_1').css({'animation': 'bounceInLeft 3s'});
         $('.container_2').css({'animation': 'bounceInRight 3s'});
         // $('.loading_page').removeClass('loading_page');
-    },300);
+    },700);
 };
 
 
 $(document).ready(()=>{
     'use strict';
 
+    let device = Device();
+        
     $(window).resize(function(){
         if ($('.container_general_6').hasClass('active')){
             $('.container_general_6').css({'min-height': '250px'});
@@ -388,6 +390,70 @@ $(document).ready(()=>{
         if ($('.footer_share').hasClass('active'))
             {$('.footer_share').addClass('active_no');
              $('.footer_share').removeClass('active');return;}
+    });
+
+    $('.social_items a').on('click', function(){
+        let scl_https = 'https:',
+            scl_app = '',
+            link = '';
+        switch ($('.social_items a').index(this)){
+            case 0:   scl_app = 'vk:';           link = '//vk.com/id278093970'; break;
+            case 1:   scl_app = 'instagram:';    link = ''; break;
+            case 2:   scl_app = 'facebook:';     link = ''; break;
+            case 3:   scl_app = 'skype:';        link = ''; break;
+            case 4:   scl_app = 'vk:';           link = '//vk.com/id2660880'; break;
+            case 5:   scl_app = 'instagram:';    link = '//instagram.com/lapkina6416'; break;
+            case 6:   scl_app = 'facebook:';     link = '//facebook.com/profile.php?id=100014775069349&fref=profile_friend_list&hc_location=friends_tab'; break;
+            case 7:   scl_app = 'skype:'; scl_https = 'skype'; link = 'olga8405?chat'; break;
+            case 8:   scl_app = 'vk:';           link = '//vk.com/club183106924 '; break;
+            case 9:  scl_app = 'facebook:';  scl_https = '';   link = '#facebook2Olgi'; break;
+            case 10:   scl_app = 'instagram:'; scl_https = '';   link = '#instagram2Olgi'; break;
+        }
+        if (scl_app == '' || scl_https == '') {return(false);}
+        if (device.indexOf('desktop') > -1) {
+            window.open(scl_https+link, 'width=800,height=300,toolbar=0,status=0'); return(false);
+        } else {
+            window.open(scl_app+link, 'width=800,height=300,toolbar=0,status=0'); return(false);
+        }
+    });
+ 
+    $('.social_group_items a').on('click', function(){
+        let scl_https = 'https:',
+            scl_app = '',
+            link = '';
+        switch ($('.social_group_items a').index(this)){
+            case 0:  scl_app = 'vk:'; link = '//vk.com/club183106924'; break;
+            case 1:  scl_app = 'instagram:'; link = ''; break;
+            case 2:  scl_app = 'facebook:'; link = ''; break;
+            case 3:  scl_app = ''; scl_https = ''; link = ''; break;
+        }
+        if (scl_app == '' || scl_https == '') {return(false);}      
+        if (device.indexOf('desktop') > -1) {
+            window.open(scl_https+link, 'width=800,height=300,toolbar=0,status=0');
+        } else {
+            window.open(scl_app+link, 'width=800,height=300,toolbar=0,status=0');
+        }
+    });
+
+    $('.share-icons a').on('click', function(){
+        let scl_https = 'https:',
+            scl_app = '',
+            link = '';
+        switch ($('.share-icons a').index(this)){
+            case 0:   scl_app = 'vk:';           link = '//vk.com/share.php?url=https://lapev.github.io'; break;
+            case 1:   scl_app = 'facebook:';     link = '//www.facebook.com/sharer.php?u=https://lapev.github.io'; break;
+            case 2:   scl_app = 'ok:';           link = '//connect.ok.ru/offer?url=https://lapev.github.io'; break;
+            case 3:   scl_app = 'twitter:';      link = '//twitter.com/share?url=https://lapev.github.io'; break;
+            case 4:   scl_app = 'mail:';         link = '//connect.mail.ru/share?url=https://lapev.github.io&title=Всё о метафорических картах и регрессиях&description=Решение жизненных проблем с помощью проверенных практик используемых именитыми психологами в их профессиональной деятельности&image_url=https://lapev.github.io/img/2Olgi.png'; break;
+            case 5:   scl_app = 'whatsapp:';     link = '//web.whatsapp.com/send?text=https://lapev.github.io'; break;
+            case 6:   scl_app = 'viber:'; scl_https='viber:'; link = '//forward?text=https://lapev.github.io'; break;
+        }
+        if (scl_app == '' || scl_https == '') {return(false);}
+        if (device.indexOf('desktop') > -1) {
+            window.open(scl_https+link, 'width=800,height=600,toolbar=0,status=0'); return(false);
+        } else {
+            window.open(scl_app+link, 'width=800,height=600,toolbar=0,status=0'); return(false);
+        }
     });
 
     $(document).click( function(event){
