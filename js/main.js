@@ -18,7 +18,7 @@ $(document).ready(()=>{
     'use strict';
 
     let device = Device();
-        
+
     $(window).resize(function(){
         if ($('.container_general_6').hasClass('active')){
             $('.container_general_6').css({'min-height': '250px'});
@@ -32,7 +32,7 @@ $(document).ready(()=>{
                 if ($('.article_list').hasClass('active')){
                     $('.article_list').css({'min-height': '250px'});
                     CheckFooter($('.article_list'));
-                    break;     
+                    break;
                 }
                 let lentgh = $('.article a').length-1;
                 for (let q = 0; q<=lentgh; q++){
@@ -52,12 +52,12 @@ $(document).ready(()=>{
     });
 
     ChangeClass($('.container_general_1'),true,'active',1);
-    
+
     function ChangeClass(mainclass, active, nameclass, number){
         if (active == true){
             if (mainclass.hasClass(nameclass+'_no')){
                 mainclass.removeClass(nameclass+'_no');
-                mainclass.addClass(nameclass);   
+                mainclass.addClass(nameclass);
                 if (nameclass == 'active'){
                     CheckFooter(mainclass);
                     if(number < 5)
@@ -71,7 +71,7 @@ $(document).ready(()=>{
                 mainclass.addClass(nameclass+'_no');
                 if (nameclass == '.container_general_5'){
                     $('.content').height() + 50;
-                }          
+                }
             }
         }
     }
@@ -136,7 +136,7 @@ $(document).ready(()=>{
 
     function MenuClick(indActive, lentgh){
         if ($('.menu').hasClass('menu_active')){
-            $('.menu').removeClass('menu_active'); 
+            $('.menu').removeClass('menu_active');
         }
         if (document.querySelector('.ham').classList.contains('active')){
             document.querySelector('.ham').classList.remove('active');
@@ -193,14 +193,15 @@ $(document).ready(()=>{
         }
     }
 
-    $('.menu a').on('click', function(event) {
+    $('.menu a').on('click', function() {
         let ind = '.menu a',
         indActive = $(ind).index(this),
         lentgh = $(ind).length-1;
-        event.preventDefault();
+        // event.preventDefault();
         MenuClick(indActive, lentgh);
         ScrlTop();
         CheckArticleActive();
+        return(true);
     });
 
     $('.container_logo a').on('click', function() {
@@ -239,14 +240,14 @@ $(document).ready(()=>{
     function ActionNo(nameclass){
         if ($(nameclass).hasClass('active')){
             $(nameclass).removeClass('active');
-            $(nameclass).addClass('active_no');  
-        }  
+            $(nameclass).addClass('active_no');
+        }
     }
     function ActionYes(nameclass){
         if (nameclass.hasClass('active_no')){
             nameclass.removeClass('active_no');
-            nameclass.addClass('active');   
-        }  
+            nameclass.addClass('active');
+        }
     }
 
     let articleMenu = $('.article_menu a'),
@@ -273,7 +274,7 @@ $(document).ready(()=>{
                 ScrlTop();
                 return;
             }
-            i= i + 2; 
+            i= i + 2;
         }
         for (let i = 2; i < lentgh-1; i++){
             if (i == indActive){
@@ -293,7 +294,7 @@ $(document).ready(()=>{
                 ScrlTop();
                 return;
             }
-            i= i + 2; 
+            i= i + 2;
         }
         for (let i = 3; i < lentgh-1; i++){
             if (i == indActive){
@@ -313,7 +314,7 @@ $(document).ready(()=>{
                 ScrlTop();
                 return;
             }
-            i= i + 2; 
+            i= i + 2;
         }
     });
 
@@ -327,7 +328,7 @@ $(document).ready(()=>{
         if ($(ind).index(this) == 1)
             {
                 indActive--;
-                lentgh--;  
+                lentgh--;
             }
         MenuClick(indActive, lentgh);
         ScrlTop();
@@ -404,19 +405,22 @@ $(document).ready(()=>{
             case 4:   scl_app = 'vk:';           link = '//vk.com/id2660880'; break;
             case 5:   scl_app = 'instagram:';    link = '//instagram.com/lapkina6416'; break;
             case 6:   scl_app = 'facebook:';     link = '//facebook.com/profile.php?id=100014775069349&fref=profile_friend_list&hc_location=friends_tab'; break;
-            case 7:   scl_app = 'skype:'; scl_https = 'skype'; link = 'olga8405?chat'; break;
+            case 7:   scl_app = 'skype:'; scl_https = 'skype:'; link = 'olga8405?chat'; break;
             case 8:   scl_app = 'vk:';           link = '//vk.com/club183106924 '; break;
-            case 9:  scl_app = 'facebook:';  scl_https = '';   link = '#facebook2Olgi'; break;
-            case 10:   scl_app = 'instagram:'; scl_https = '';   link = '#instagram2Olgi'; break;
+            case 9:   scl_app = 'facebook:';  scl_https = '';   link = '#facebook2Olgi'; break;
+            case 10:  scl_app = 'instagram:'; scl_https = '';   link = '#instagram2Olgi'; break;
+            case 11:  scl_app = 'share';  scl_https = 'share'; link = ''; break;
+            case 12:  scl_app = 'feedback'; scl_https = 'feedback';   link = '#feedback'; break;
         }
-        if (scl_app == '' || scl_https == '') {return(false);}
+        if (scl_app == 'share') {return(false);}
+        if (scl_app == 'feedback') {return(true);}
         if (device.indexOf('desktop') > -1) {
             window.open(scl_https+link, 'width=800,height=300,toolbar=0,status=0'); return(false);
         } else {
             window.open(scl_app+link, 'width=800,height=300,toolbar=0,status=0'); return(false);
         }
     });
- 
+
     $('.social_group_items a').on('click', function(){
         let scl_https = 'https:',
             scl_app = '',
@@ -425,13 +429,13 @@ $(document).ready(()=>{
             case 0:  scl_app = 'vk:'; link = '//vk.com/club183106924'; break;
             case 1:  scl_app = 'instagram:'; link = ''; break;
             case 2:  scl_app = 'facebook:'; link = ''; break;
-            case 3:  scl_app = ''; scl_https = ''; link = ''; break;
+            case 3:  scl_app = 'feedback'; scl_https = 'feedback'; link = '#feedback'; break;
         }
-        if (scl_app == '' || scl_https == '') {return(false);}      
+        if (scl_app == 'feedback') {return(true);}
         if (device.indexOf('desktop') > -1) {
-            window.open(scl_https+link, 'width=800,height=300,toolbar=0,status=0');
+            window.open(scl_https+link, 'width=800,height=300,toolbar=0,status=0'); return(false);
         } else {
-            window.open(scl_app+link, 'width=800,height=300,toolbar=0,status=0');
+            window.open(scl_app+link, 'width=800,height=300,toolbar=0,status=0'); return(false);
         }
     });
 
@@ -457,12 +461,12 @@ $(document).ready(()=>{
     });
 
     $(document).click( function(event){
-        if( $(event.target).closest(".share").length  ) 
+        if( $(event.target).closest(".share").length  )
           return;
         if ($('.footer_share').hasClass('active'))
         {$('.footer_share').addClass('active_no');
         $('.footer_share').removeClass('active');return;}
         event.stopPropagation();
       });
-      
+
 });
