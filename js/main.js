@@ -13,6 +13,13 @@ window.onload = function(){
     },700);
 };
 
+window.addEventListener("hashchange", function(e) {
+    console.log(window.location.hash);
+    $.each(hrefs, function(){
+        if (this.hrefs == window.location.hash){
+            console.log('good');
+        }
+  });
 
 $(document).ready(()=>{
     'use strict';
@@ -236,6 +243,7 @@ $(document).ready(()=>{
         lentgh = $(ind).length;
         ArticleClick(indActive, lentgh);
         ScrlTop();
+        return(true);
     });
 
     function ActionNo(nameclass){
@@ -253,12 +261,12 @@ $(document).ready(()=>{
 
     let articleMenu = $('.article_menu a'),
     lengthAMenu = articleMenu.length;
-    articleMenu.eq(0).css({'opacity':'0', 'cursor':'context-menu'});
-    articleMenu.eq(lengthAMenu-1).css({'opacity':'0', 'cursor':'context-menu'});
+    articleMenu.eq(0).css({'opacity':'0', 'cursor':'context-menu', 'z-index':'-1'});
+    articleMenu.eq(lengthAMenu-1).css({'opacity':'0', 'cursor':'context-menu', 'z-index':'-1'});
     $('.article_menu a').on('click', function(){
         let indActive = $('.article_menu a').index(this),
         lentgh = $('.article_menu a').length-1;
-        event.preventDefault();
+        // event.preventDefault();
         for (let i = 1; i < lentgh; i++){
             if (i == indActive){
                 for (let q = 0; q < $('.article').length; q++){
@@ -273,7 +281,7 @@ $(document).ready(()=>{
                 active_window = 3;
                 CheckFooter($('.article_list'));
                 ScrlTop();
-                return;
+                return(true);
             }
             i= i + 2;
         }
@@ -293,7 +301,7 @@ $(document).ready(()=>{
                 ActionYes($('.article').eq(articleactive));
                 CheckFooter($('.article').eq(articleactive));
                 ScrlTop();
-                return;
+                return(true);
             }
             i= i + 2;
         }
@@ -313,7 +321,7 @@ $(document).ready(()=>{
                 ActionYes($('.article').eq(articleactive));
                 CheckFooter($('.article').eq(articleactive));
                 ScrlTop();
-                return;
+                return(true);
             }
             i= i + 2;
         }
@@ -350,14 +358,15 @@ $(document).ready(()=>{
             }
         }
     });
-
-    $('.footer_last_articles span').text($('.article h3').eq($('.article h3').length-1).text());
-    $('.footer_last_articles').on('click', function(){
+    let article_length = $('.article h3').length;
+    $('.footer_last_articles a').text($('.article h3').eq(article_length-1).text());
+    $('.footer_last_articles a').on('click', function(){
         MenuClick(3, 6);
         let ind = '.article',
         lentgh = $(ind).length;
         ArticleClick(lentgh-1, lentgh);
         ScrlTop();
+        $('.footer_last_articles a').attr('href','#article'+article_length);
     });
 
 
@@ -408,8 +417,8 @@ $(document).ready(()=>{
             case 6:   scl_app = 'facebook:';     link = '//facebook.com/profile.php?id=100014775069349&fref=profile_friend_list&hc_location=friends_tab'; break;
             case 7:   scl_app = 'skype:'; scl_https = 'skype:'; link = 'olga8405?chat'; break;
             case 8:   scl_app = 'vk:';           link = '//vk.com/club183106924 '; break;
-            case 9:   scl_app = 'facebook:';  scl_https = '';   link = '#facebook2Olgi'; break;
-            case 10:  scl_app = 'instagram:'; scl_https = '';   link = '#instagram2Olgi'; break;
+            case 9:   scl_app = 'facebook:';     link = ''; break;
+            case 10:  scl_app = 'instagram:';    link = ''; break;
             case 11:  scl_app = 'share';  scl_https = 'share'; link = ''; break;
             case 12:  scl_app = 'feedback'; scl_https = 'feedback';   link = '#feedback'; break;
         }
