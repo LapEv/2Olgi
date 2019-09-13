@@ -9,21 +9,57 @@ window.onload = function(){
         $('.container_3_logo').removeClass('hidden');
         $('.container_1').css({'animation': 'bounceInLeft 3s'});
         $('.container_2').css({'animation': 'bounceInRight 3s'});
-        // $('.loading_page').removeClass('loading_page');
     },700);
 };
-
-window.addEventListener("hashchange", function(e) {
-    console.log(window.location.hash);
-    $.each(hrefs, function(){
-        if (this.hrefs == window.location.hash){
-            console.log('good');
-        }
-  });
 
 $(document).ready(()=>{
     'use strict';
 
+    let length = {
+        menu : $('.menu a').length,
+        article : $('.article_list a').length
+    };
+
+    // $('.article_list a').each(function(index){
+    //     let articles = {
+    //         name+${index} : 'Статья №1'
+    // }
+    // });
+
+    function ChangeTitle(index){
+        switch (index){
+            case 0: document.title = '2Oльги. Всё о метафорических картах и регрессиях'; break; 
+            case 1: document.title = '2Oльги. МАК'; break; 
+            case 2: document.title = '2Oльги. Регрессии'; break; 
+            case 3: document.title = '2Oльги. Статьи'; break; 
+            case 4: document.title = '2Oльги. Контакты'; break; 
+            case (length.menu+2): document.title = '2Oльги. Статья1'; break; 
+        }
+    }
+
+    window.addEventListener("hashchange", function() {
+        $('a').each(function(index){
+            console.log('index = '+index+' element = '+$(this).attr('href'));
+            if ($(this).attr('href') == window.location.hash){
+                if (index < length.menu) {
+                    MenuClick(index, length.menu-1);
+                    ScrlTop();
+                    CheckArticleActive();
+                    ChangeTitle(index);
+                }
+                if (index >= length.menu+2 && index < (length.menu+2)+length.article-1) {
+                    let index_article = index - (length.menu+2);
+                    ArticleClick(index_article, length.article);
+                    ScrlTop();
+                    ChangeTitle(index);
+                }
+
+                console.log('good'+window.location.hash);
+                return false;
+            }
+        });
+    });
+    
     let device = Device();
 
     $(window).resize(function(){
@@ -200,16 +236,16 @@ $(document).ready(()=>{
         }
     }
 
-    $('.menu a').on('click', function() {
-        let ind = '.menu a',
-        indActive = $(ind).index(this),
-        lentgh = $(ind).length-1;
-        // event.preventDefault();
-        MenuClick(indActive, lentgh);
-        ScrlTop();
-        CheckArticleActive();
-        return(true);
-    });
+    // $('.menu a').on('click', function() {
+    //     let ind = '.menu a',
+    //     indActive = $(ind).index(this),
+    //     lentgh = $(ind).length-1;
+    //     // event.preventDefault();
+    //     MenuClick(indActive, lentgh);
+    //     ScrlTop();
+    //     CheckArticleActive();
+    //     return(true);
+    // });
 
     $('.container_logo a').on('click', function() {
         let ind = '.container_logo a',
@@ -237,14 +273,14 @@ $(document).ready(()=>{
         }
     }
 
-    $('.article_list a').on('click', function() {
-        let ind = '.article_list a',
-        indActive = $(ind).index(this),
-        lentgh = $(ind).length;
-        ArticleClick(indActive, lentgh);
-        ScrlTop();
-        return(true);
-    });
+    // $('.article_list a').on('click', function() {
+    //     let ind = '.article_list a',
+    //     indActive = $(ind).index(this),
+    //     lentgh = $(ind).length;
+    //     ArticleClick(indActive, lentgh);
+    //     ScrlTop();
+    //     return(true);
+    // });
 
     function ActionNo(nameclass){
         if ($(nameclass).hasClass('active')){

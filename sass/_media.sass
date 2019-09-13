@@ -14,8 +14,9 @@
 					li
 						font-size: 42pt
 			@for $i from 1 through 2
-				&_#{$i}_descr{padding-top: 90px
-				font-size: 11pt}
+				&_#{$i}_descr{padding-top: 110px
+				font-size: 10pt
+				@if $i==2 {font-size: 11pt}}
 				&_#{$i}_info{padding: 6px 12px
 				font-size: 7pt}
 			&_logo
@@ -23,7 +24,7 @@
 					.delimiter_1, .delimiter_2
 						width: 27px
 					&_descr
-						font-size: 15pt
+						font-size: 14pt
 					&_logo
 						li
 							font-size: 43pt
@@ -33,6 +34,12 @@
 				@for $i from 1 through 4
 					&_img_#{$i}{width: 275px
 					height: 208px}
+		&.general_five
+			.container
+				&_1_descr
+					padding-top: 140px
+					font-size: 11pt
+
 	.article
 		width: 737px
 		&_list, &_menu
@@ -97,8 +104,9 @@
 				li
 					font-size: 34pt
 			@for $i from 1 through 2
-				&_#{$i}_descr{padding-top: 68px
-				font-size: 8pt}
+				&_#{$i}_descr{padding-top: 50px
+				font-size: 7pt
+				@if $i==2 {font-size: 8pt}}
 				&_#{$i}_info{padding: 11px 8px
 				font-size: 6pt}
 			&_logo
@@ -159,10 +167,13 @@
 					height: 220px
 					transition: height 1s	
 				&_1_descr
-					padding-top: 110px
-				&_2_descr
-					padding-top: 80px
+					padding-top: 70px
 					font-size: 10pt
+				&_2_descr
+					padding-top: 70px
+					font-size: 10pt
+				&_2_info
+					margin-top: 14%
 			.contact_2_logo
 				li	
 					font-size: 40pt	
@@ -172,6 +183,10 @@
 				&_logo
 					height: 180px
 					transition: height 1s 2s		
+				&_1_descr
+					padding-top: 50px
+				&_2_descr
+					padding-top: 50px
 			.contact_2_logo
 				li	
 					font-size: 0pt
@@ -351,9 +366,7 @@
 				li
 					font-size: 34pt
 			@for $i from 1 through 2
-				&_#{$i}_descr{padding-top: 60px
-				font-size: 9pt
-				@if ($i == 1){font-size: 8pt}}
+				&_#{$i}_descr{padding-top: 40px}
 				&_#{$i}_info{padding: 6px 6px
 				margin-top: 5px
 				font-size: 7pt
@@ -429,11 +442,13 @@
 						padding-right: 10px
 				@for $i from 1 through 2
 					&_#{$i}{width: 35%}
-					&_#{$i}_descr{padding-top: 90px
+					&_#{$i}_descr{padding-top: 70px
 					font-size: 9pt
 					@if ($i == 1){font-size: 8pt}}
 					&_#{$i}_info{padding: 11px 11px
 					font-size: 7pt}	
+					&_2_info
+						margin-top: 3%
 			.contact_2_logo
 				li	
 					font-size: 28pt	
@@ -454,7 +469,7 @@
 						transform: translateX(0px) translateY(0px)
 				@for $i from 1 through 2
 					&_#{$i}{width: 25%}
-					&_#{$i}_descr{padding-top: 60px
+					&_#{$i}_descr{padding-top: 40px
 					font-size: 9pt
 					@if ($i == 1){font-size: 8pt}}
 					&_#{$i}_info{padding: 6px 6px
@@ -560,6 +575,8 @@
 				.container_3
 					&_descr
 						font-size: 10.2pt
+			&_1_descr
+				font-size: 7pt
 			&_general
 				@for $i from 1 through 4
 					&_#{$i}{width: 390px}
@@ -584,9 +601,9 @@
 				&_3_descr
 					font-size: 8pt
 				&_1_descr{font-size: 8pt
-				padding-top: 75px}
+				padding-top: 65px}
 				&_2_info{padding: 6px 6px}				
-				&_2_descr{padding-top: 80px}
+				&_2_descr{padding-top: 65px}
 				&_2_info{margin-top: 20px
 				padding: 6px 6px}
 		&.general_five_no
@@ -678,7 +695,10 @@
 				.container_3
 					&_descr
 						font-size: 9pt
-			&_1_descr{font-size: 7pt}
+			&_1_descr
+				font-size: 6pt
+			&_2_descr
+				font-size: 7pt
 			&_general
 				@for $i from 1 through 4
 					&_#{$i}{width: 350px}
@@ -691,6 +711,9 @@
 			.container
 				&_3_descr
 					font-size: 8pt
+				&_1_descr{padding-top: 70px
+				font-size: 7pt}
+				&_2_descr{padding-top: 70px}
 		&.general_five_no
 			.container
 				&_3_descr
@@ -778,8 +801,7 @@
 						li
 							font-size: 25pt
 			&_1_descr{font-size: 5pt}
-			&_2_descr{padding-top: 50px
-			font-size: 7pt}
+			&_2_descr{font-size: 7pt}
 			&_general
 				padding: 0px
 				margin-top: 15px
@@ -811,9 +833,10 @@
 						transform: translateX(0px) translateY(0px)
 				&_3_descr
 					font-size: 7pt
-				&_1_descr{padding-top: 90px
+				&_1_descr{padding-top: 75px
 				font-size: 6pt}
-				&_2_descr{padding-top: 80px}
+				&_2_descr{padding-top: 75px
+				font-size: 8pt}
 			.contact_2_logo
 				li
 					font-size: 22pt
@@ -832,8 +855,7 @@
 				&_3_descr
 					font-size: 8pt
 				&_1_descr{font-size: 5pt}
-				&_2_descr{padding-top: 50px
-				font-size: 7pt}
+				&_2_descr{font-size: 7pt}
 	.article
 		width: 300px
 		&_list, &_menu
