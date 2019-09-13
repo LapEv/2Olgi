@@ -19,12 +19,10 @@ $(document).ready(()=>{
         menu : $('.menu a').length,
         article : $('.article_list a').length
     };
-
-    // $('.article_list a').each(function(index){
-    //     let articles = {
-    //         name+${index} : 'Статья №1'
-    // }
-    // });
+    let articles = {};
+    $('.article_list a').each(function(index){
+        articles['title'+index] = $('.article h3').eq(index).text();
+    });
 
     function ChangeTitle(index){
         switch (index){
@@ -33,7 +31,6 @@ $(document).ready(()=>{
             case 2: document.title = '2Oльги. Регрессии'; break; 
             case 3: document.title = '2Oльги. Статьи'; break; 
             case 4: document.title = '2Oльги. Контакты'; break; 
-            case (length.menu+2): document.title = '2Oльги. Статья1'; break; 
         }
     }
 
@@ -51,7 +48,7 @@ $(document).ready(()=>{
                     let index_article = index - (length.menu+2);
                     ArticleClick(index_article, length.article);
                     ScrlTop();
-                    ChangeTitle(index);
+                    document.title = `2Oльги. ${articles['title'+index_article]}`;
                 }
 
                 console.log('good'+window.location.hash);
