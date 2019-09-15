@@ -1,5 +1,3 @@
-let active_window = 0;
-
 window.onload = function(){
     setTimeout(()=> {
         $('.container-header').addClass('active');
@@ -11,19 +9,32 @@ window.onload = function(){
         $('.container_2').css({'animation': 'bounceInRight 3s'});
     },700);
 };
+let active_window = '';
 
 $(document).ready(()=>{
     'use strict';
+    
 
     let length = {
         menu : $('.menu a').length,
-        article : $('.article_list a').length
+        article : $('.article_list a').length,
+        article_menu : $('.article_menu a').length,
+        feedback: $('.feedback').length
     };
+
     let articles = {};
     $('.article_list a').each(function(index){
         articles['title'+index] = $('.article h3').eq(index).text();
     });
 
+    //---- For hidden next article for maximum and pref articles for minimum
+    $('.article_menu a').eq(0).css({'opacity':'0', 'cursor':'context-menu', 'z-index':'-1'});
+    $('.article_menu a').eq(length.article_menu-1).css({'opacity':'0', 'cursor':'context-menu', 'z-index':'-1'});
+
+    //---- For Footer Last Articles
+    $('.footer_last_articles a').text($('.article h3').eq(length.article-1).text());
+    $('.footer_last_articles a').attr('href', '#article'+length.article);
+    
     function ChangeTitle(index){
         switch (index){
             case 0: document.title = '2Oльги. Всё о метафорических картах и регрессиях'; break; 
@@ -36,7 +47,7 @@ $(document).ready(()=>{
 
     window.addEventListener("hashchange", function() {
         $('a').each(function(index){
-            console.log('index = '+index+' element = '+$(this).attr('href'));
+            // console.log('index = '+index+' element = '+$(this).attr('href'));
             if ($(this).attr('href') == window.location.hash){
                 if (index < length.menu) {
                     MenuClick(index, length.menu-1);
@@ -44,14 +55,33 @@ $(document).ready(()=>{
                     CheckArticleActive();
                     ChangeTitle(index);
                 }
-                if (index >= length.menu+2 && index < (length.menu+2)+length.article-1) {
+                if (index >= length.menu+2 && index <= (length.menu+2)+length.article-1) {
                     let index_article = index - (length.menu+2);
+                    if (index == (length.menu+2)+length.article-1){
+                        MenuClick(3, 6);
+                    }
                     ArticleClick(index_article, length.article);
                     ScrlTop();
                     document.title = `2Oльги. ${articles['title'+index_article]}`;
                 }
-
-                console.log('good'+window.location.hash);
+                if (window.location.hash == '#feedback2Olgi'){
+                    if ($('.container_general_6').hasClass('active')){
+                        ActionNo('.footer_share');
+                        return;}
+                    let ind = '.feedback',
+                    indActive = $(ind).index(this)+5;
+                    length.feedback = length.feedback+5;
+                    if ($(ind).index(this) == 1)
+                        {
+                            indActive--;
+                            length.feedback--;
+                        }
+                    MenuClick(indActive, length.feedback);
+                    ScrlTop();
+                    return false;
+                }
+                // console.log('good '+window.location.hash);
+                // console.log('good '+$(this).attr('href'));
                 return false;
             }
         });
@@ -216,16 +246,9 @@ $(document).ready(()=>{
     function CheckArticleActive(){
         if ($('.container_general_4').hasClass('active_no') || $('.article_list').hasClass('active_no')){
             ChangeClass($('.article_list'),true,'active',7);
-            // if ($('.article_list').hasClass('active_no')){
-            //     $('.article_list').removeClass('active_no');
-            //     $('.article_list').addClass('active');}
             for (let i = 0; i < $('.article').length; i++){
                 ChangeClass($('.article').eq(i),false,'active',7);
-                // if ($('.article').eq(i).hasClass('active')){
-                //     $('.article').eq(i).removeClass('active');
-                //     $('.article').eq(i).addClass('active_no');
-                    minHeightCorrect($('.article').eq(i));
-                // }
+                minHeightCorrect($('.article').eq(i));
             }
         }
         if ($('.container_general_4').hasClass('active') && $('.article_list').hasClass('active')){
@@ -233,34 +256,11 @@ $(document).ready(()=>{
         }
     }
 
-    // $('.menu a').on('click', function() {
-    //     let ind = '.menu a',
-    //     indActive = $(ind).index(this),
-    //     lentgh = $(ind).length-1;
-    //     // event.preventDefault();
-    //     MenuClick(indActive, lentgh);
-    //     ScrlTop();
-    //     CheckArticleActive();
-    //     return(true);
-    // });
-
-    $('.container_logo a').on('click', function() {
-        let ind = '.container_logo a',
-        indActive = $(ind).index(this)+1,
-        lentgh = $(ind).length+1;
-        MenuClick(indActive, lentgh);
-        ScrlTop();
-        CheckArticleActive();
-        return(true);
-    });
-
     function ArticleClick(indActive, lentgh){
         for(let i=0; i<lentgh; i++){
             if (i == indActive){
                 ChangeClass($('.article_list'),false,'active',0);
                 ChangeClass($('.article').eq(i),true,'active',0);
-                // $('.article_list').removeClass('active');
-                // $('.article_list').addClass('active_no');
                 minHeightCorrect($('.article_list'));
             } else {
                 ChangeClass($('.article').eq(i),false,'active',0);
@@ -269,15 +269,6 @@ $(document).ready(()=>{
             active_window = indActive+6;
         }
     }
-
-    // $('.article_list a').on('click', function() {
-    //     let ind = '.article_list a',
-    //     indActive = $(ind).index(this),
-    //     lentgh = $(ind).length;
-    //     ArticleClick(indActive, lentgh);
-    //     ScrlTop();
-    //     return(true);
-    // });
 
     function ActionNo(nameclass){
         if ($(nameclass).hasClass('active')){
@@ -291,90 +282,6 @@ $(document).ready(()=>{
             nameclass.addClass('active');
         }
     }
-
-    let articleMenu = $('.article_menu a'),
-    lengthAMenu = articleMenu.length;
-    articleMenu.eq(0).css({'opacity':'0', 'cursor':'context-menu', 'z-index':'-1'});
-    articleMenu.eq(lengthAMenu-1).css({'opacity':'0', 'cursor':'context-menu', 'z-index':'-1'});
-    $('.article_menu a').on('click', function(){
-        let indActive = $('.article_menu a').index(this),
-        lentgh = $('.article_menu a').length-1;
-        // event.preventDefault();
-        for (let i = 1; i < lentgh; i++){
-            if (i == indActive){
-                for (let q = 0; q < $('.article').length; q++){
-                    ChangeClass($('.article').eq(q),false,'active',0);
-                    minHeightCorrect($('.article').eq(q));
-                    // if ($('.article').eq(q).hasClass('active')){
-                    //     $('.article').eq(q).removeClass('active');
-                    //     $('.article').eq(q).addClass('active_no');
-                    // }
-                }
-                ActionYes($('.article_list'));
-                active_window = 3;
-                CheckFooter($('.article_list'));
-                ScrlTop();
-                return(true);
-            }
-            i= i + 2;
-        }
-        for (let i = 2; i < lentgh-1; i++){
-            if (i == indActive){
-                let articleactive;
-                for (let q = 0; q < $('.article').length; q++){
-                    if ($('.article').eq(q).hasClass('active')){
-                        articleactive = q+1;
-                        active_window = articleactive + 6;
-                        ChangeClass($('.article').eq(q),false,'active',0);
-                        minHeightCorrect($('.article').eq(q));
-                        // $('.article').eq(q).removeClass('active');
-                        // $('.article').eq(q).addClass('active_no');
-                    }
-                }
-                ActionYes($('.article').eq(articleactive));
-                CheckFooter($('.article').eq(articleactive));
-                ScrlTop();
-                return(true);
-            }
-            i= i + 2;
-        }
-        for (let i = 3; i < lentgh-1; i++){
-            if (i == indActive){
-                let articleactive;
-                for (let q = 0; q < $('.article').length; q++){
-                    if ($('.article').eq(q).hasClass('active')){
-                        articleactive = q-1;
-                        active_window = articleactive + 6;
-                        ChangeClass($('.article').eq(q),false,'active',0);
-                        minHeightCorrect($('.article').eq(q));
-                        // $('.article').eq(q).removeClass('active');
-                        // $('.article').eq(q).addClass('active_no');
-                    }
-                }
-                ActionYes($('.article').eq(articleactive));
-                CheckFooter($('.article').eq(articleactive));
-                ScrlTop();
-                return(true);
-            }
-            i= i + 2;
-        }
-    });
-
-    $('.feedback').on('click', function() {
-        if ($('.container_general_6').hasClass('active')){
-            ActionNo('.footer_share');
-            return;}
-        let ind = '.feedback',
-        indActive = $(ind).index(this)+5,
-        lentgh = $(ind).length+5;
-        if ($(ind).index(this) == 1)
-            {
-                indActive--;
-                lentgh--;
-            }
-        MenuClick(indActive, lentgh);
-        ScrlTop();
-    });
 
     $('.cross').on('click', function() {
         if ($('.container_general_6').hasClass('active')){
@@ -391,17 +298,6 @@ $(document).ready(()=>{
             }
         }
     });
-    let article_length = $('.article h3').length;
-    $('.footer_last_articles a').text($('.article h3').eq(article_length-1).text());
-    $('.footer_last_articles a').on('click', function(){
-        MenuClick(3, 6);
-        let ind = '.article',
-        lentgh = $(ind).length;
-        ArticleClick(lentgh-1, lentgh);
-        ScrlTop();
-        $('.footer_last_articles a').attr('href','#article'+article_length);
-    });
-
 
     $('.slct').click(function(){
 	let dropBlock = $(this).parent().find('.drop');
@@ -436,10 +332,49 @@ $(document).ready(()=>{
              $('.footer_share').removeClass('active');return;}
     });
 
+    let social_items = {
+        OlgaR : {
+            vk : '//vk.com/id278093970',
+            instagram : '',
+            facebook : '',
+            skype : ''
+        },
+        OlgaL : {
+            vk : '//vk.com/id2660880',
+            instagram : '//instagram.com/lapkina6416',
+            facebook : '//facebook.com/profile.php?id=100014775069349&fref=profile_friend_list&hc_location=friends_tab',
+            skype : 'olga8405?chat'
+        },
+        Olgi2 : {
+            vk : '//vk.com/club183106924',
+            instagram : '',
+            facebook : '',
+        },
+        App : {
+            http : 'https:',
+            vk : 'vk:',
+            facebook : 'facebook:',
+            instagram : 'instagram:',
+            skype : 'skype:',
+            share : 'share',
+            feedback : 'feedback',
+            viber : 'viber:'
+        },
+        Share : {
+            vk:           '//vk.com/share.php?url=https://lapev.github.io',
+            facebook:     '//www.facebook.com/sharer.php?u=https://lapev.github.io',
+            ok:           '//connect.ok.ru/offer?url=https://lapev.github.io',
+            twitter:      '//twitter.com/share?url=https://lapev.github.io',
+            mail:         '//connect.mail.ru/share?url=https://lapev.github.io&title=Всё о метафорических картах и регрессиях&description=Решение жизненных проблем с помощью проверенных практик используемых именитыми психологами в их профессиональной деятельности&image_url=https://lapev.github.io/img/2Olgi.png',
+            whatsapp:     '//web.whatsapp.com/send?text=https://lapev.github.io',
+            viber:        '//forward?text=https://lapev.github.io'
+        }
+    };
+    
     $('.social_items a').on('click', function(){
-        let scl_https = 'https:',
-            scl_app = '',
-            link = '';
+        $('для объекта, его создать с ссылками').each(function(){
+            
+        });
         switch ($('.social_items a').index(this)){
             case 0:   scl_app = 'vk:';           link = '//vk.com/id278093970'; break;
             case 1:   scl_app = 'instagram:';    link = ''; break;
