@@ -95,8 +95,8 @@ $(document).ready(()=>{
             CheckFooter($('.container_general_6'));
             return;
         }
-        for (let i = 1; i<=5; i++){
-            if (i==4){
+        for (let i = 1; i<=length.menu; i++){
+            if (i==length.menu-1){
                 if ($('.container_general_'+i).hasClass('active')){
                     $('.container_general_'+i).css({'min-height': '250px'});}
                 if ($('.article_list').hasClass('active')){
@@ -130,7 +130,7 @@ $(document).ready(()=>{
                 mainclass.addClass(nameclass);
                 if (nameclass == 'active'){
                     CheckFooter(mainclass);
-                    if(number < 5)
+                    if(number < length.menu)
                       {ActionNo('.container_general_6');}
                     ActionNo('.footer_share');
                 }
@@ -211,7 +211,7 @@ $(document).ready(()=>{
         if (document.querySelector('.ham').classList.contains('active')){
             document.querySelector('.ham').classList.remove('active');
         }
-        if ($('.container_general_5').hasClass('active') && indActive != 4){
+        if ($('.container_general_5').hasClass('active') && indActive != length.menu-1){
             ChangeClass($('.main_container'),false,'general_five',indActive);
             ChangeClass($('.container_general_5'),false,'active',indActive);
             if(indActive != 5){
@@ -237,7 +237,7 @@ $(document).ready(()=>{
             } else {
                 ChangeClass($('.main_container'),false,'general_five',indActive);
             }
-            if(indActive != 5){
+            if(indActive != length.menu){
                 active_window = indActive;
             }
         }
@@ -245,9 +245,9 @@ $(document).ready(()=>{
 
     function CheckArticleActive(){
         if ($('.container_general_4').hasClass('active_no') || $('.article_list').hasClass('active_no')){
-            ChangeClass($('.article_list'),true,'active',7);
+            ChangeClass($('.article_list'),true,'active',length.article);
             for (let i = 0; i < $('.article').length; i++){
-                ChangeClass($('.article').eq(i),false,'active',7);
+                ChangeClass($('.article').eq(i),false,'active',length.article);
                 minHeightCorrect($('.article').eq(i));
             }
         }
@@ -266,7 +266,7 @@ $(document).ready(()=>{
                 ChangeClass($('.article').eq(i),false,'active',0);
                 minHeightCorrect($('.article').eq(i));
             }
-            active_window = indActive+6;
+            active_window = indActive+length.menu+1;
         }
     }
 
@@ -332,56 +332,56 @@ $(document).ready(()=>{
              $('.footer_share').removeClass('active');return;}
     });
 
-    let social_items = {
-        OlgaR : {
-            vk : '//vk.com/id278093970',
-            instagram : '',
-            facebook : '',
-            skype : ''
-        },
-        OlgaL : {
-            vk : '//vk.com/id2660880',
-            instagram : '//instagram.com/lapkina6416',
-            facebook : '//facebook.com/profile.php?id=100014775069349&fref=profile_friend_list&hc_location=friends_tab',
-            skype : 'olga8405?chat'
-        },
-        Olgi2 : {
-            vk : '//vk.com/club183106924',
-            instagram : '',
-            facebook : '',
-        },
-        App : {
-            http : 'https:',
-            vk : 'vk:',
-            facebook : 'facebook:',
-            instagram : 'instagram:',
-            skype : 'skype:',
-            share : 'share',
-            feedback : 'feedback',
-            viber : 'viber:'
-        },
-        Share : {
-            vk:           '//vk.com/share.php?url=https://lapev.github.io',
-            facebook:     '//www.facebook.com/sharer.php?u=https://lapev.github.io',
-            ok:           '//connect.ok.ru/offer?url=https://lapev.github.io',
-            twitter:      '//twitter.com/share?url=https://lapev.github.io',
-            mail:         '//connect.mail.ru/share?url=https://lapev.github.io&title=Всё о метафорических картах и регрессиях&description=Решение жизненных проблем с помощью проверенных практик используемых именитыми психологами в их профессиональной деятельности&image_url=https://lapev.github.io/img/2Olgi.png',
-            whatsapp:     '//web.whatsapp.com/send?text=https://lapev.github.io',
-            viber:        '//forward?text=https://lapev.github.io'
-        }
-    };
+    // let social_items = {
+    //     OlgaR : {
+    //         vk : '//vk.com/id278093970',
+    //         instagram : '',
+    //         facebook : '',
+    //         skype : ''
+    //     },
+    //     OlgaL : {
+    //         vk : '//vk.com/id2660880',
+    //         instagram : '//instagram.com/lapkina6416',
+    //         facebook : '//facebook.com/profile.php?id=100014775069349&fref=profile_friend_list&hc_location=friends_tab',
+    //         skype : 'olga8405?chat'
+    //     },
+    //     Olgi2 : {
+    //         vk : '//vk.com/club183106924',
+    //         instagram : '',
+    //         facebook : '',
+    //     },
+    //     App : {
+    //         https : 'https:',
+    //         vk : 'vk:',
+    //         facebook : 'facebook:',
+    //         instagram : 'instagram:',
+    //         skype : 'skype:',
+    //         share : 'share',
+    //         feedback : 'feedback',
+    //         viber : 'viber:'
+    //     },
+    //     Share : {
+    //         vk:           '//vk.com/share.php?url=https://lapev.github.io',
+    //         facebook:     '//www.facebook.com/sharer.php?u=https://lapev.github.io',
+    //         ok:           '//connect.ok.ru/offer?url=https://lapev.github.io',
+    //         twitter:      '//twitter.com/share?url=https://lapev.github.io',
+    //         mail:         '//connect.mail.ru/share?url=https://lapev.github.io&title=Всё о метафорических картах и регрессиях&description=Решение жизненных проблем с помощью проверенных практик используемых именитыми психологами в их профессиональной деятельности&image_url=https://lapev.github.io/img/2Olgi.png',
+    //         whatsapp:     '//web.whatsapp.com/send?text=https://lapev.github.io',
+    //         viber:        '//forward?text=https://lapev.github.io'
+    //     }
+    // };
     
     $('.social_items a').on('click', function(){
-        $('для объекта, его создать с ссылками').each(function(){
-            
-        });
+        let scl_app,
+            scl_https = 'https:',
+            link = '';
         switch ($('.social_items a').index(this)){
             case 0:   scl_app = 'vk:';           link = '//vk.com/id278093970'; break;
             case 1:   scl_app = 'instagram:';    link = ''; break;
             case 2:   scl_app = 'facebook:';     link = ''; break;
             case 3:   scl_app = 'skype:';        link = ''; break;
             case 4:   scl_app = 'vk:';           link = '//vk.com/id2660880'; break;
-            case 5:   scl_app = 'instagram:';    link = '//instagram.com/lapkina6416'; break;
+            case 5:   scl_app = 'instagram:';    link = '//user?username=lapkina6416'; break;
             case 6:   scl_app = 'facebook:';     link = '//facebook.com/profile.php?id=100014775069349&fref=profile_friend_list&hc_location=friends_tab'; break;
             case 7:   scl_app = 'skype:'; scl_https = 'skype:'; link = 'olga8405?chat'; break;
             case 8:   scl_app = 'vk:';           link = '//vk.com/club183106924 '; break;
