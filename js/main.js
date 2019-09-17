@@ -9,7 +9,6 @@ window.onload = function(){
         $('.container_2').css({'animation': 'bounceInRight 3s'});
     },700);
 };
-let active_window = '';
 
 $(document).ready(()=>{
     'use strict';
@@ -45,28 +44,34 @@ $(document).ready(()=>{
         }
     }
 
-    window.addEventListener("hashchange", function() {
+    function ChangeLocation(location){
         $('a').each(function(index){
             // console.log('index = '+index+' element = '+$(this).attr('href'));
-            if ($(this).attr('href') == window.location.hash){
+            if ($(this).attr('href') == location){
                 if (index < length.menu) {
+                    CheckArticleActive();
                     MenuClick(index, length.menu-1);
                     ScrlTop();
-                    CheckArticleActive();
                     ChangeTitle(index);
+                    $('.cross a').attr('href',location);
                 }
                 if (index >= length.menu+2 && index <= (length.menu+2)+length.article-1) {
                     let index_article = index - (length.menu+2);
                     if (index == (length.menu+2)+length.article-1){
                         MenuClick(3, 6);
                     }
+                    if ($('.container_general_6').hasClass('active')){
+                        ActiveClassChange($('.container_general_6'), 'active', 'active_no');
+                    }            
                     ArticleClick(index_article, length.article);
+                    ActiveClassChange($('.container_general_4'), 'active_no', 'active');
                     ScrlTop();
                     document.title = `2Oльги. ${articles['title'+index_article]}`;
+                    $('.cross a').attr('href',location);
                 }
-                if (window.location.hash == '#feedback2Olgi'){
+                if (location == '#feedback2Olgi'){
                     if ($('.container_general_6').hasClass('active')){
-                        ActionNo('.footer_share');
+                        ActiveClassChange($('.footer_share'), 'active', 'active_no');
                         return;}
                     let ind = '.feedback',
                     indActive = $(ind).index(this)+5;
@@ -76,15 +81,20 @@ $(document).ready(()=>{
                             indActive--;
                             length.feedback--;
                         }
+                    CheckArticleActive();
                     MenuClick(indActive, length.feedback);
                     ScrlTop();
                     return false;
                 }
-                // console.log('good '+window.location.hash);
-                // console.log('good '+$(this).attr('href'));
                 return false;
             }
         });
+    }
+
+    ChangeLocation(document.location.hash);
+
+    window.addEventListener("hashchange", function() {
+        ChangeLocation(window.location.hash);
     });
     
     let device = Device();
@@ -121,8 +131,6 @@ $(document).ready(()=>{
         }
     });
 
-    ChangeClass($('.container_general_1'),true,'active',1);
-
     function ChangeClass(mainclass, active, nameclass, number){
         if (active == true){
             if (mainclass.hasClass(nameclass+'_no')){
@@ -131,8 +139,8 @@ $(document).ready(()=>{
                 if (nameclass == 'active'){
                     CheckFooter(mainclass);
                     if(number < length.menu)
-                      {ActionNo('.container_general_6');}
-                    ActionNo('.footer_share');
+                      {ActiveClassChange($('.container_general_6'), 'active', 'active_no');}
+                    ActiveClassChange($('.footer_share'), 'active', 'active_no');
                 }
             }
         } else {
@@ -184,14 +192,6 @@ $(document).ready(()=>{
         }
     }
 
-    function CheckActive(lentgh){
-        for(let i=0; i<=lentgh; i++){
-            if ($('.container_general_'+(i+1)).hasClass('active')){
-                return(false);
-            }
-        } return(true);
-    }
-
     function ScrlTop(){
         $('.main').animate({
             scrollTop: $("#maintop").offset().top
@@ -204,6 +204,14 @@ $(document).ready(()=>{
         },1500);
     }
 
+    function CheckActive(){
+        for(let i=0; i<=length.menu; i++){
+            if ($('.container_general_'+(i+1)).hasClass('active')){
+                return(false);
+            }
+        } return(true);
+    }
+
     function MenuClick(indActive, lentgh){
         if ($('.menu').hasClass('menu_active')){
             $('.menu').removeClass('menu_active');
@@ -214,9 +222,6 @@ $(document).ready(()=>{
         if ($('.container_general_5').hasClass('active') && indActive != length.menu-1){
             ChangeClass($('.main_container'),false,'general_five',indActive);
             ChangeClass($('.container_general_5'),false,'active',indActive);
-            if(indActive != 5){
-                active_window = indActive;
-            }
             setTimeout(()=> {
                 if (CheckActive(lentgh) == true){
                     ChangeClass($('.container_general_'+(indActive+1)),true,'active',indActive);
@@ -236,9 +241,6 @@ $(document).ready(()=>{
                 $('.main_container').addClass('general_five');
             } else {
                 ChangeClass($('.main_container'),false,'general_five',indActive);
-            }
-            if(indActive != length.menu){
-                active_window = indActive;
             }
         }
     }
@@ -266,38 +268,15 @@ $(document).ready(()=>{
                 ChangeClass($('.article').eq(i),false,'active',0);
                 minHeightCorrect($('.article').eq(i));
             }
-            active_window = indActive+length.menu+1;
         }
     }
 
-    function ActionNo(nameclass){
-        if ($(nameclass).hasClass('active')){
-            $(nameclass).removeClass('active');
-            $(nameclass).addClass('active_no');
+    function ActiveClassChange(nameclass, classname, classname_new){
+        if (nameclass.hasClass(classname)){
+            nameclass.removeClass(classname);
+            nameclass.addClass(classname_new);
         }
     }
-    function ActionYes(nameclass){
-        if (nameclass.hasClass('active_no')){
-            nameclass.removeClass('active_no');
-            nameclass.addClass('active');
-        }
-    }
-
-    $('.cross').on('click', function() {
-        if ($('.container_general_6').hasClass('active')){
-            ActionNo('.container_general_6');
-            if (active_window > 5){
-                ActionYes($('.article').eq(active_window-6));
-                ActionYes($('.container_general_4'));
-                CheckFooter($('.article').eq(active_window-6));
-                ScrlTop();
-            } else {
-                MenuClick(active_window, active_window);
-                CheckFooter($('.article_list'));
-                ScrlTop();
-            }
-        }
-    });
 
     $('.slct').click(function(){
 	let dropBlock = $(this).parent().find('.drop');
@@ -382,7 +361,7 @@ $(document).ready(()=>{
             case 3:   scl_app = 'skype:';        link = ''; break;
             case 4:   scl_app = 'vk:';           link = '//vk.com/id2660880'; break;
             case 5:   scl_app = 'instagram:';    link = '//user?username=lapkina6416'; break;
-            case 6:   scl_app = 'facebook:';     link = '//facebook.com/profile.php?id=100014775069349&fref=profile_friend_list&hc_location=friends_tab'; break;
+            case 6:   scl_app = 'fb:';     link = '//facebook.com/profile.php?id=100014775069349'; break;
             case 7:   scl_app = 'skype:'; scl_https = 'skype:'; link = 'olga8405?chat'; break;
             case 8:   scl_app = 'vk:';           link = '//vk.com/club183106924 '; break;
             case 9:   scl_app = 'facebook:';     link = ''; break;
@@ -395,6 +374,7 @@ $(document).ready(()=>{
         if (device.indexOf('desktop') > -1) {
             window.open(scl_https+link, 'width=800,height=300,toolbar=0,status=0'); return(false);
         } else {
+            if (scl_app == 'fb') {link = '//profile/100014775069349';}
             window.open(scl_app+link, 'width=800,height=300,toolbar=0,status=0'); return(false);
         }
     });
@@ -423,7 +403,7 @@ $(document).ready(()=>{
             link = '';
         switch ($('.share-icons a').index(this)){
             case 0:   scl_app = 'vk:';           link = '//vk.com/share.php?url=https://lapev.github.io'; break;
-            case 1:   scl_app = 'facebook:';     link = '//www.facebook.com/sharer.php?u=https://lapev.github.io'; break;
+            case 1:   scl_app = 'fb:';           link = '//www.facebook.com/sharer.php?u=https://lapev.github.io'; break;
             case 2:   scl_app = 'ok:';           link = '//connect.ok.ru/offer?url=https://lapev.github.io'; break;
             case 3:   scl_app = 'twitter:';      link = '//twitter.com/share?url=https://lapev.github.io'; break;
             case 4:   scl_app = 'mail:';         link = '//connect.mail.ru/share?url=https://lapev.github.io&title=Всё о метафорических картах и регрессиях&description=Решение жизненных проблем с помощью проверенных практик используемых именитыми психологами в их профессиональной деятельности&image_url=https://lapev.github.io/img/2Olgi.png'; break;
@@ -434,6 +414,7 @@ $(document).ready(()=>{
         if (device.indexOf('desktop') > -1) {
             window.open(scl_https+link, 'width=800,height=600,toolbar=0,status=0'); return(false);
         } else {
+            if (scl_app == 'fb') {link = '//sharer.php?u=https://lapev.github.io';}
             window.open(scl_app+link, 'width=800,height=600,toolbar=0,status=0'); return(false);
         }
     });
