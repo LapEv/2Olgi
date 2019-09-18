@@ -2,9 +2,6 @@ window.onload = function(){
     if (window.location.hash == '') {
         window.location.hash = '#main';
     }
-    if (window.location.hash == '#feedback2Olgi'){
-        console.log('alert');
-    }
     setTimeout(()=> {
         $('.container-header').addClass('active');
         $('.main_container').addClass('active');
@@ -19,6 +16,13 @@ window.onload = function(){
 $(document).ready(()=>{
     'use strict';
     
+    $('.cross').on('click', function(){
+        if ($('.cross a').attr('href') == '#feedbackclose'){
+            history.back();
+            $('.cross a').attr('href',window.location.hash);
+        }
+    });
+
     let length = {
         menu : $('.menu a').length,
         article : $('.article_list a').length,
@@ -74,6 +78,8 @@ $(document).ready(()=>{
                     document.title = `2Oльги. ${articles['title'+index_article]}`;
                     $('.cross a').attr('href',location);
                 }
+                if (location == '#feedbackclose'){
+                    console.log('yes');}  
                 if (location == '#feedback2Olgi'){
                     if ($('.container_general_6').hasClass('active')){
                         ActiveClassChange($('.footer_share'), 'active', 'active_no');
