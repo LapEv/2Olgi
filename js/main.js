@@ -1,4 +1,10 @@
 window.onload = function(){
+    if (window.location.hash == '') {
+        window.location.hash = '#main';
+    }
+    if (window.location.hash == '#feedback2Olgi'){
+        console.log('alert');
+    }
     setTimeout(()=> {
         $('.container-header').addClass('active');
         $('.main_container').addClass('active');
@@ -13,7 +19,6 @@ window.onload = function(){
 $(document).ready(()=>{
     'use strict';
     
-
     let length = {
         menu : $('.menu a').length,
         article : $('.article_list a').length,
@@ -84,6 +89,7 @@ $(document).ready(()=>{
                     CheckArticleActive();
                     MenuClick(indActive, length.feedback);
                     ScrlTop();
+                    document.title = `2Oльги. Форма обратной связи`;
                     return false;
                 }
                 return false;
