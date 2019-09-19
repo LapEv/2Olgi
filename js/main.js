@@ -175,7 +175,7 @@ $(document).ready(()=>{
         let timeout = 0;
         let diffHeight = bodyHeight-logoHeight-footerHeight-MarginHeight;
         if ($('.content').height() > diffHeight){
-            timeout = 500;
+            timeout = 2000;
         }
         setTimeout(()=> {
             $('.content').height(mainHeight);
@@ -190,6 +190,7 @@ $(document).ready(()=>{
                 $('.footer').css({'position':'relative'});
             }
         }, timeout);
+
         let height = diffHeight-MarginHeight*2;
         if (mainclass.selector != '.container_general_5'){
             if (mainHeight <= height){
@@ -212,7 +213,9 @@ $(document).ready(()=>{
 
     function minHeightCorrect(mainclass){
         setTimeout(()=> {
-            mainclass.css({'min-height': '250px'});
+            if (mainclass.hasClass('active_no')){
+                mainclass.css({'min-height': '250px'});
+            }
         },1500);
     }
 
