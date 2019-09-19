@@ -176,42 +176,34 @@ $(document).ready(()=>{
             content : $('.content').height(),
             diff : 0,
             min : 0,
-//            container_full : $('.container_form').outerHeight(true),
-//            container : $('.container_form').height(),
+            container_full : $('.container_form').outerHeight(true),
+            container : $('.container_form').height(),
             timeout : 0
         };
 
-        let bodyHeight = $('body').height(),
-            mainHeight = mainclass.outerHeight(true),
-            footerHeight = $('.footer').outerHeight(true),
-            logoHeight = $('.container_logo').outerHeight(true),
-            MarginHeight = $('.container_general').outerHeight(true)-$('.container_general').outerHeight(false);
-        let timeout = 0;
         height.diff = height.body-height.logo-height.footer-height.margin;
-        if ($('.content').height() > height.diff){
-            timeout = 2000;
+        if (height.content > height.diff){
+            height.timeout = 2000;
         }
         setTimeout(()=> {
-            $('.content').height(mainHeight);
+            $('.content').height(height.main);
             if ($('.content').height() < height.diff){
-                if (timeout > 0){$('.footer').css({'bottom':'-50px'});}
+                if (height.timeout > 0){$('.footer').css({'bottom':'-50px'});}
                 $('.footer').animate({
                         'bottom':'0'
                 },300);
                 $('.footer').css({'position':'absolute'});
             } else {
-                $('.content').height(mainHeight+MarginHeight*3);
+                $('.content').height(height.main+height.margin*3);
                 $('.footer').css({'position':'relative'});
             }
-        }, timeout);
+        }, height.timeout);
 
-        let h = height.diff-MarginHeight*2;
+        let h = height.diff-height.margin*2;
         if (mainclass.selector != '.container_general_5'){
-            if (mainHeight <= h){
+            if (height.main <= h){
                 if (mainclass.selector == '.container_general_6'){
-                    let h1 = $('.container_form').outerHeight(true),
-                        h2 = $('.container_form').height();
-                    h = h1 + (h1-h2)/0.67;
+                    h = height.container_full + (height.container_full-height.container)/0.67;
                 }
                 h=h+'px';
                 mainclass.css({'min-height': h});
