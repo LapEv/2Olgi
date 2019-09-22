@@ -23,6 +23,15 @@ $(document).ready(()=>{
         }
     });
 
+    let menu = {};
+    $('.menu a').each(function(index){
+        let i = index + 1;
+        menu['name'+i] = $('.menu a').eq(index).text();
+        menu['attr'+i] = $('.menu a').eq(index).attr('href');
+        menu['title'+i] = $('.menu a').eq(index).attr('title');
+        menu['class'+i] = 'container_general_'+i;
+    });
+
     let length = {
         menu : $('.menu a').length,
         article : $('.article_list a').length,
@@ -43,37 +52,26 @@ $(document).ready(()=>{
     $('.footer_last_articles a').text($('.article h3').eq(length.article-1).text());
     $('.footer_last_articles a').attr('href', '#article'+length.article);
     
-    function ChangeTitle(index){
-        switch (index){
-            case 0: document.title = '2Oльги. Всё о метафорических картах и регрессиях'; break; 
-            case 1: document.title = '2Oльги. МАК'; break; 
-            case 2: document.title = '2Oльги. Регрессии'; break; 
-            case 3: document.title = '2Oльги. Статьи'; break; 
-            case 4: document.title = '2Oльги. Контакты'; break; 
-        }
-    }
 
     function ChangeLocation(location){
         $('a').each(function(index){
             // console.log('index = '+index+' element = '+$(this).attr('href'));
             if ($(this).attr('href') == location){
                 if (index < length.menu) {
-                    CheckArticleActive();
-                    MenuClick(index, length.menu-1);
+                    // CheckArticleActive();
+                    MenuClick();
+//                    ActiveClassChange(nameclass, classname, classname_new);
                     ScrlTop();
-                    ChangeTitle(index);
+//                    ChangeTitle(index);
                     $('.cross a').attr('href',location);
                 }
                 if (index >= length.menu+2 && index <= (length.menu+2)+length.article-1) {
                     let index_article = index - (length.menu+2);
-                    if (index == (length.menu+2)+length.article-1){
-                        MenuClick(3, 6);
-                    }
                     if ($('.container_general_6').hasClass('active')){
                         ActiveClassChange($('.container_general_6'), 'active', 'active_no');
                     }            
-                    ArticleClick(index_article, length.article);
-                    ActiveClassChange($('.container_general_4'), 'active_no', 'active');
+                    // ArticleClick(index_article, length.article);
+                    MenuClick();
                     ScrlTop();
                     document.title = `2Oльги. ${articles['title'+index_article]}`;
                     $('.cross a').attr('href',location);
@@ -92,8 +90,8 @@ $(document).ready(()=>{
                             indActive--;
                             length.feedback--;
                         }
-                    CheckArticleActive();
-                    MenuClick(indActive, length.feedback);
+                    // CheckArticleActive();
+                    MenuClick();
                     ScrlTop();
                     document.title = `2Oльги. Форма обратной связи`;
                     return false;
@@ -105,9 +103,30 @@ $(document).ready(()=>{
 
     ChangeLocation(document.location.hash);
 
-    window.addEventListener("hashchange", function() {
-        ChangeLocation(window.location.hash);
+    window.addEventListener("popstate", function() {
+        console.log(location.hash);
+        console.log(window.history.state);
+        console.log(history.state);
+        ChangeLocation(location.hash);
     });
+
+    window.onpopstate = function(event) {
+        console.log("location: " + location.href);
+        // console.log("location: " + location.href + ", state: " + JSON.stringify(event.state));
+      };
+      
+      // добавить состояние истории
+      history.pushState({page: 1}, "title 1", "?page=1");
+      history.pushState({page: 2}, "title 2", "?page=2");
+      
+      // заменить текущее состояние
+      history.replaceState({page: 3}, "title 3", "?page=3");
+      
+      history.back(); // location: http://example.com/example.html?page=1, state: {"page":1}
+      history.back(); // location: http://example.com/example.html, state: null
+      history.go(2);  // location: http://example.com/example.html?page=3, state: {"page":3}
+      
+      console.log(history.state) // Object {page: 3}
     
     let device = Device();
 
@@ -143,28 +162,28 @@ $(document).ready(()=>{
         }
     });
 
-    function ChangeClass(mainclass, active, nameclass, number){
-        if (active == true){
-            if (mainclass.hasClass(nameclass+'_no')){
-                mainclass.removeClass(nameclass+'_no');
-                mainclass.addClass(nameclass);
-                if (nameclass == 'active'){
-                    CheckFooter(mainclass);
-                    if(number < length.menu)
-                      {ActiveClassChange($('.container_general_6'), 'active', 'active_no');}
-                    ActiveClassChange($('.footer_share'), 'active', 'active_no');
-                }
-            }
-        } else {
-            if (mainclass.hasClass(nameclass)){
-                mainclass.removeClass(nameclass);
-                mainclass.addClass(nameclass+'_no');
-                if (nameclass == '.container_general_5'){
-                    $('.content').height() + 50;
-                }
-            }
-        }
-    }
+    // function ChangeClass(mainclass, active, nameclass, number){
+    //     if (active == true){
+    //         if (mainclass.hasClass(nameclass+'_no')){
+    //             mainclass.removeClass(nameclass+'_no');
+    //             mainclass.addClass(nameclass);
+    //             if (nameclass == 'active'){
+    //                 CheckFooter(mainclass);
+    //                 if(number < length.menu)
+    //                   {ActiveClassChange($('.container_general_6'), 'active', 'active_no');}
+    //                 ActiveClassChange($('.footer_share'), 'active', 'active_no');
+    //             }
+    //         }
+    //     } else {
+    //         if (mainclass.hasClass(nameclass)){
+    //             mainclass.removeClass(nameclass);
+    //             mainclass.addClass(nameclass+'_no');
+    //             if (nameclass == '.container_general_5'){
+    //                 $('.content').height() + 50;
+    //             }
+    //         }
+    //     }
+    // }
 
     function CheckFooter(mainclass){
         let height = {
@@ -225,72 +244,62 @@ $(document).ready(()=>{
         },1500);
     }
 
-    function CheckActive(){
-        for(let i=0; i<=length.menu; i++){
-            if ($('.container_general_'+(i+1)).hasClass('active')){
-                return(false);
-            }
-        } return(true);
-    }
-
-    function MenuClick(indActive, lentgh){
+    function MenuClick(){
         if ($('.menu').hasClass('menu_active')){
             $('.menu').removeClass('menu_active');
         }
         if (document.querySelector('.ham').classList.contains('active')){
             document.querySelector('.ham').classList.remove('active');
         }
-        if ($('.container_general_5').hasClass('active') && indActive != length.menu-1){
-            ChangeClass($('.main_container'),false,'general_five',indActive);
-            ChangeClass($('.container_general_5'),false,'active',indActive);
-            setTimeout(()=> {
-                if (CheckActive(lentgh) == true){
-                    ChangeClass($('.container_general_'+(indActive+1)),true,'active',indActive);
-                }
-            }, 2000);
-            return;
-        }
-        for(let i=0; i<=lentgh; i++){
-            if (i == indActive){
-                ChangeClass($('.container_general_'+(i+1)),true,'active',indActive);
-            } else {
-                ChangeClass($('.container_general_'+(i+1)),false,'active',indActive);
-                if (indActive != 4){minHeightCorrect($('.container_general_'+(i+1)));}
-            }
-            if (indActive == 4){
-                ChangeClass($('.main_container'),true,'general_five',indActive);
-                $('.main_container').addClass('general_five');
-            } else {
-                ChangeClass($('.main_container'),false,'general_five',indActive);
-            }
-        }
+        // if ($('.container_general_5').hasClass('active') && indActive != length.menu-1){
+        //     ChangeClass($('.main_container'),false,'general_five',indActive);
+        //     ChangeClass($('.container_general_5'),false,'active',indActive);
+        //     setTimeout(()=> {
+        //         ChangeClass($('.container_general_'+(indActive+1)),true,'active',indActive);
+        //     }, 2000);
+        //     return;
+        // }
+        // for(let i=0; i<=lentgh; i++){
+        //     if (i == indActive){
+        //         ChangeClass($('.container_general_'+(i+1)),true,'active',indActive);
+        //     } else {
+        //         ChangeClass($('.container_general_'+(i+1)),false,'active',indActive);
+        //         if (indActive != 4){minHeightCorrect($('.container_general_'+(i+1)));}
+        //     }
+        //     if (indActive == 4){
+        //         ChangeClass($('.main_container'),true,'general_five',indActive);
+        //         $('.main_container').addClass('general_five');
+        //     } else {
+        //         ChangeClass($('.main_container'),false,'general_five',indActive);
+        //     }
+        // }
     }
 
-    function CheckArticleActive(){
-        if ($('.container_general_4').hasClass('active_no') || $('.article_list').hasClass('active_no')){
-            ChangeClass($('.article_list'),true,'active',length.article);
-            for (let i = 0; i < $('.article').length; i++){
-                ChangeClass($('.article').eq(i),false,'active',length.article);
-                minHeightCorrect($('.article').eq(i));
-            }
-        }
-        if ($('.container_general_4').hasClass('active') && $('.article_list').hasClass('active')){
-            CheckFooter($('.article_list'));
-        }
-    }
+    // function CheckArticleActive(){
+    //     if ($('.container_general_4').hasClass('active_no') || $('.article_list').hasClass('active_no')){
+    //         ChangeClass($('.article_list'),true,'active',length.article);
+    //         for (let i = 0; i < $('.article').length; i++){
+    //             ChangeClass($('.article').eq(i),false,'active',length.article);
+    //             minHeightCorrect($('.article').eq(i));
+    //         }
+    //     }
+    //     if ($('.container_general_4').hasClass('active') && $('.article_list').hasClass('active')){
+    //         CheckFooter($('.article_list'));
+    //     }
+    // }
 
-    function ArticleClick(indActive, lentgh){
-        for(let i=0; i<lentgh; i++){
-            if (i == indActive){
-                ChangeClass($('.article_list'),false,'active',0);
-                ChangeClass($('.article').eq(i),true,'active',0);
-                minHeightCorrect($('.article_list'));
-            } else {
-                ChangeClass($('.article').eq(i),false,'active',0);
-                minHeightCorrect($('.article').eq(i));
-            }
-        }
-    }
+    // function ArticleClick(indActive, lentgh){
+    //     for(let i=0; i<lentgh; i++){
+    //         if (i == indActive){
+    //             ChangeClass($('.article_list'),false,'active',0);
+    //             ChangeClass($('.article').eq(i),true,'active',0);
+    //             minHeightCorrect($('.article_list'));
+    //         } else {
+    //             ChangeClass($('.article').eq(i),false,'active',0);
+    //             minHeightCorrect($('.article').eq(i));
+    //         }
+    //     }
+    // }
 
     function ActiveClassChange(nameclass, classname, classname_new){
         if (nameclass.hasClass(classname)){
