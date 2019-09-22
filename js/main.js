@@ -12,16 +12,165 @@ window.onload = function(){
         $('.container_2').css({'animation': 'bounceInRight 3s'});
     },700);
 };
-let menu = {
-    name : {},
-    attr : {},
-    title: {},
-    class: {} 
+
+const menu = {
+    _name: {},
+    get name() {
+        return this._name;
+    },
+    set name(value) {
+        this._name = value;
+    },
+    _attr: {},
+    get attr() {
+        return this._attr;
+    },
+    set attr(value) {
+        this._attr = value;
+    },
+    _title: {},
+    get title() {
+        return this._title;
+    },
+    set title(value) {
+        this._title = value;
+    },
+    _class: {}, 
+    get class() {
+        return this._class;
+    },
+    set class(value) {
+        this._class = value;
+    },
+    ChangeActive: function (className,newClassName,index,timeoutChange){
+        if (index > 0){ // for change to active status
+            if ($(this.class[index]).hasClass(className)){
+                $(this.class[index]).removeClass(className);
+            }
+            setTimeout(()=> {
+                $(this.class[index]).addClass(newClassName);
+                document.title = this.title[index];
+                CheckFooter($(this.class[index]));
+            },timeoutChange);
+            
+            if (index == 5){
+                if ($('.main_container').hasClass('general_five_no')){
+                    $('.main_container').removeClass('general_five_no');
+                }
+                $('.main_container').addClass('general_five');
+            } 
+        } else { // for change to active_no status
+            for (let key in this.class){
+                if ($(this.class[key]).hasClass(className)){
+                    $(this.class[key]).removeClass(className);
+                    $(this.class[key]).addClass(newClassName);
+                    menu.HeightCorrect(this.class[key]);
+                }
+                if (key == 5){ 
+                    if ($('.main_container').hasClass('general_five')){
+                        $('.main_container').removeClass('general_five');
+                        $('.main_container').addClass('general_five_no');
+                        return(true);
+                    }
+                }
+            }
+        }
+    },
+    HeightCorrect: (nameclass)=>{
+        setTimeout(()=> {
+            $(nameclass).css({'min-height': '250px'});
+        },1500);
+    },
+    mobileVersion : ()=>{
+        if ($('.menu').hasClass('menu_active')){
+            $('.menu').removeClass('menu_active');
+        }
+        if (document.querySelector('.ham').classList.contains('active')){
+            document.querySelector('.ham').classList.remove('active');
+        }
+    },
+    Cross : ()=>{
+        $('.cross a').attr('href',window.location.hash);
+    },
+    ScrlTop : ()=>{
+        $('.main').animate({
+            scrollTop: $("#maintop").offset().top
+        }, 500);
+    }
 },
-    articles = {};
+articles = {
+    
+};
+
+//==== Record object menu
+$('.menu a').each(function(index){
+    let i = index + 1;
+    menu.name[i] = $('.menu a').eq(index).text();
+    menu.attr[i] = $('.menu a').eq(index).attr('href');
+    menu.title[i] = $('.menu a').eq(index).attr('title');
+    menu.class[i] = '.container_general_'+i;
+});
+
+//==== Record object article
+$('.article_list a').each(function(index){
+    articles['title'+index] = $('.article h3').eq(index).text();
+});
+
+function CheckFooter(mainclass){
+    let height = {
+        body : $('body').height(),
+        main : mainclass.outerHeight(true),
+        footer : $('.footer').outerHeight(true),
+        logo : $('.container_logo').outerHeight(true),
+        margin : $('.container_general').outerHeight(true)-$('.container_general').outerHeight(false),
+        content : $('.content').height(),
+        diff : 0,
+        min : 0,
+        container_full : $('.container_form').outerHeight(true),
+        container : $('.container_form').height(),
+        timeout : 0
+    };
+    console.log('content = '+$('.content').outerHeight());
+    console.log('logo = '+$('.container_logo').outerHeight());
+    console.log('maincont = '+$('.main_container').outerHeight());
+    console.log('five = '+$('.general_five').outerHeight());
+    console.log('five_no = '+$('.general_five_no').outerHeight());
+    console.log('==================================');
+
+    height.diff = height.body-height.logo-height.footer-height.margin;
+    if (height.content > height.diff){
+        height.timeout = 2000;
+    }
+    setTimeout(()=> {
+        $('.content').height(height.main);
+        if ($('.content').height() < height.diff){
+            if (height.timeout > 0){$('.footer').css({'bottom':'-50px'});}
+            $('.footer').animate({
+                    'bottom':'0'
+            },300);
+            $('.footer').css({'position':'absolute'});
+        } else {
+            $('.content').height(height.main+height.margin*3);
+            $('.footer').css({'position':'relative'});
+        }
+    }, height.timeout);
+
+    let h = height.diff-height.margin*2;
+    if (mainclass.selector != '.container_general_5'){
+        if (height.main <= h){
+            if (mainclass.selector == '.container_general_6'){
+                h = height.container_full + (height.container_full-height.container)/0.67;
+            }
+            h=h+'px';
+            mainclass.css({'min-height': h});
+        }
+    }
+}
 
 $(document).ready(()=>{
     'use strict';
+
+    let device = Device();
     
     $('.cross').on('click', function(){
         if ($('.cross a').attr('href') == '#feedbackclose'){
@@ -30,24 +179,12 @@ $(document).ready(()=>{
         }
     });
 
-    $('.menu a').each(function(index){
-        let i = index + 1;
-        menu.name[i] = $('.menu a').eq(index).text();
-        menu.attr[i] = $('.menu a').eq(index).attr('href');
-        menu.title[i] = $('.menu a').eq(index).attr('title');
-        menu.class[i] = '.container_general_'+i;
-    });
-
     let length = {
         menu : $('.menu a').length,
         article : $('.article_list a').length,
         article_menu : $('.article_menu a').length,
         feedback: $('.feedback').length
     };
-
-    $('.article_list a').each(function(index){
-        articles['title'+index] = $('.article h3').eq(index).text();
-    });
 
     //---- For hidden next article for maximum and pref articles for minimum
     $('.article_menu a').eq(0).css({'opacity':'0', 'cursor':'context-menu', 'z-index':'-1'});
@@ -60,16 +197,15 @@ $(document).ready(()=>{
 
     function ChangeLocation(location){
         $('a').each(function(index){
-            // console.log('index = '+index+' element = '+$(this).attr('href'));
             if ($(this).attr('href') == location){
                 if (index < length.menu) {
                     // CheckArticleActive();
-                    MenuClick();
-                    ActiveClassChange(menu.class[index+1],'active_no', 'active');
-                    CheckFooter($(menu.class[index+1]));
-                    ScrlTop();
-//                    ChangeTitle(index);
-                    $('.cross a').attr('href',location);
+                    menu.mobileVersion();
+                    let timeoutChange = 0;
+                    if (menu.ChangeActive('active','active_no',0)){timeoutChange = 2000;}
+                    menu.ChangeActive('active_no','active',index+1,timeoutChange);
+                    menu.ScrlTop();
+                    menu.Cross();
                 }
                 if (index >= length.menu+2 && index <= (length.menu+2)+length.article-1) {
                     let index_article = index - (length.menu+2);
@@ -113,8 +249,6 @@ $(document).ready(()=>{
         ChangeLocation(location.hash);
     });
 
-    let device = Device();
-
     $(window).resize(function(){
         if ($('.container_general_6').hasClass('active')){
             $('.container_general_6').css({'min-height': '250px'});
@@ -147,95 +281,19 @@ $(document).ready(()=>{
         }
     });
 
-    // function ChangeClass(mainclass, active, nameclass, number){
-    //     if (active == true){
-    //         if (mainclass.hasClass(nameclass+'_no')){
-    //             mainclass.removeClass(nameclass+'_no');
-    //             mainclass.addClass(nameclass);
-    //             if (nameclass == 'active'){
-    //                 CheckFooter(mainclass);
-    //                 if(number < length.menu)
-    //                   {ActiveClassChange($('.container_general_6'), 'active', 'active_no');}
-    //                 ActiveClassChange($('.footer_share'), 'active', 'active_no');
-    //             }
-    //         }
-    //     } else {
-    //         if (mainclass.hasClass(nameclass)){
-    //             mainclass.removeClass(nameclass);
-    //             mainclass.addClass(nameclass+'_no');
-    //             if (nameclass == '.container_general_5'){
-    //                 $('.content').height() + 50;
-    //             }
-    //         }
-    //     }
+    // function ScrlTop(){
+    //     $('.main').animate({
+    //         scrollTop: $("#maintop").offset().top
+    //     }, 500);
     // }
 
-    function CheckFooter(mainclass){
-        let height = {
-            body : $('body').height(),
-            main : mainclass.outerHeight(true),
-            footer : $('.footer').outerHeight(true),
-            logo : $('.container_logo').outerHeight(true),
-            margin : $('.container_general').outerHeight(true)-$('.container_general').outerHeight(false),
-            content : $('.content').height(),
-            diff : 0,
-            min : 0,
-            container_full : $('.container_form').outerHeight(true),
-            container : $('.container_form').height(),
-            timeout : 0
-        };
-
-        height.diff = height.body-height.logo-height.footer-height.margin;
-        if (height.content > height.diff){
-            height.timeout = 2000;
-        }
-        setTimeout(()=> {
-            $('.content').height(height.main);
-            if ($('.content').height() < height.diff){
-                if (height.timeout > 0){$('.footer').css({'bottom':'-50px'});}
-                $('.footer').animate({
-                        'bottom':'0'
-                },300);
-                $('.footer').css({'position':'absolute'});
-            } else {
-                $('.content').height(height.main+height.margin*3);
-                $('.footer').css({'position':'relative'});
-            }
-        }, height.timeout);
-
-        let h = height.diff-height.margin*2;
-        if (mainclass.selector != '.container_general_5'){
-            if (height.main <= h){
-                if (mainclass.selector == '.container_general_6'){
-                    h = height.container_full + (height.container_full-height.container)/0.67;
-                }
-                h=h+'px';
-                mainclass.css({'min-height': h});
-            }
-        }
-    }
-
-    function ScrlTop(){
-        $('.main').animate({
-            scrollTop: $("#maintop").offset().top
-        }, 500);
-    }
-
-    function minHeightCorrect(mainclass){
-        setTimeout(()=> {
-            if (mainclass.hasClass('active_no')){
-                mainclass.css({'min-height': '250px'});
-            }
-        },1500);
-    }
-
-    function MenuClick(){
-        if ($('.menu').hasClass('menu_active')){
-            $('.menu').removeClass('menu_active');
-        }
-        if (document.querySelector('.ham').classList.contains('active')){
-            document.querySelector('.ham').classList.remove('active');
-        }
+    // function MenuClick(){
+    //     if ($('.menu').hasClass('menu_active')){
+    //         $('.menu').removeClass('menu_active');
+    //     }
+    //     if (document.querySelector('.ham').classList.contains('active')){
+    //         document.querySelector('.ham').classList.remove('active');
+    //     }
         // if ($('.container_general_5').hasClass('active') && indActive != length.menu-1){
         //     ChangeClass($('.main_container'),false,'general_five',indActive);
         //     ChangeClass($('.container_general_5'),false,'active',indActive);
@@ -258,7 +316,7 @@ $(document).ready(()=>{
         //         ChangeClass($('.main_container'),false,'general_five',indActive);
         //     }
         // }
-    }
+    // }
 
     // function CheckArticleActive(){
     //     if ($('.container_general_4').hasClass('active_no') || $('.article_list').hasClass('active_no')){
@@ -285,13 +343,6 @@ $(document).ready(()=>{
     //         }
     //     }
     // }
-
-    function ActiveClassChange(nameclass, classname, classname_new){
-        if ($(nameclass).hasClass(classname)){
-            $(nameclass).removeClass(classname);
-            $(nameclass).addClass(classname_new);
-        }
-    }
 
     $('.slct').click(function(){
 	let dropBlock = $(this).parent().find('.drop');
