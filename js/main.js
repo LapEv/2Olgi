@@ -12,6 +12,13 @@ window.onload = function(){
         $('.container_2').css({'animation': 'bounceInRight 3s'});
     },700);
 };
+let menu = {
+    name : {},
+    attr : {},
+    title: {},
+    class: {} 
+},
+    articles = {};
 
 $(document).ready(()=>{
     'use strict';
@@ -23,13 +30,12 @@ $(document).ready(()=>{
         }
     });
 
-    let menu = {};
     $('.menu a').each(function(index){
         let i = index + 1;
-        menu['name'+i] = $('.menu a').eq(index).text();
-        menu['attr'+i] = $('.menu a').eq(index).attr('href');
-        menu['title'+i] = $('.menu a').eq(index).attr('title');
-        menu['class'+i] = 'container_general_'+i;
+        menu.name[i] = $('.menu a').eq(index).text();
+        menu.attr[i] = $('.menu a').eq(index).attr('href');
+        menu.title[i] = $('.menu a').eq(index).attr('title');
+        menu.class[i] = '.container_general_'+i;
     });
 
     let length = {
@@ -39,7 +45,6 @@ $(document).ready(()=>{
         feedback: $('.feedback').length
     };
 
-    let articles = {};
     $('.article_list a').each(function(index){
         articles['title'+index] = $('.article h3').eq(index).text();
     });
@@ -60,7 +65,8 @@ $(document).ready(()=>{
                 if (index < length.menu) {
                     // CheckArticleActive();
                     MenuClick();
-//                    ActiveClassChange(nameclass, classname, classname_new);
+                    ActiveClassChange(menu.class[index+1],'active_no', 'active');
+                    CheckFooter($(menu.class[index+1]));
                     ScrlTop();
 //                    ChangeTitle(index);
                     $('.cross a').attr('href',location);
@@ -103,31 +109,10 @@ $(document).ready(()=>{
 
     ChangeLocation(document.location.hash);
 
-    window.addEventListener("popstate", function() {
-        console.log(location.hash);
-        console.log(window.history.state);
-        console.log(history.state);
+    window.addEventListener("hashchange", function() {
         ChangeLocation(location.hash);
     });
 
-    window.onpopstate = function(event) {
-        console.log("location: " + location.href);
-        // console.log("location: " + location.href + ", state: " + JSON.stringify(event.state));
-      };
-      
-      // добавить состояние истории
-      history.pushState({page: 1}, "title 1", "?page=1");
-      history.pushState({page: 2}, "title 2", "?page=2");
-      
-      // заменить текущее состояние
-      history.replaceState({page: 3}, "title 3", "?page=3");
-      
-      history.back(); // location: http://example.com/example.html?page=1, state: {"page":1}
-      history.back(); // location: http://example.com/example.html, state: null
-      history.go(2);  // location: http://example.com/example.html?page=3, state: {"page":3}
-      
-      console.log(history.state) // Object {page: 3}
-    
     let device = Device();
 
     $(window).resize(function(){
@@ -302,9 +287,9 @@ $(document).ready(()=>{
     // }
 
     function ActiveClassChange(nameclass, classname, classname_new){
-        if (nameclass.hasClass(classname)){
-            nameclass.removeClass(classname);
-            nameclass.addClass(classname_new);
+        if ($(nameclass).hasClass(classname)){
+            $(nameclass).removeClass(classname);
+            $(nameclass).addClass(classname_new);
         }
     }
 
