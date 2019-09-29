@@ -41,9 +41,6 @@
 					font-size: 11pt
 
 	.article
-		width: 737px
-		&_list, &_menu
-			width: 737px
 		@for $i from 1 through $countarticle
 			&_img_#{$i}{width: 275px
 			height: 208px}
@@ -92,6 +89,8 @@
 				font-size: 13pt		
 	.main_container
 		.container
+			&_height
+				height: 180px
 			&_logo, &_general, &_general_5, &_general_6
 				width: 544px
 			&_logo
@@ -136,7 +135,7 @@
 					h3, a
 						font-size: 11pt
 				&_5
-					min-height: 230px
+					min-height: 250px
 					a
 						font-size: 7pt	
 					img
@@ -162,6 +161,8 @@
 							transition: box-shadow 1.5s ease 1.8s
 							box-shadow: 0px 0px 15px 12px rgba(255,86,81,0.9)
 		&.general_five
+			.container_height
+				height: 220px
 			.container
 				&_logo
 					height: 220px
@@ -179,6 +180,8 @@
 					font-size: 40pt	
 					transition: all 2s ease	2s
 		&.general_five_no
+			.container_height
+				height: 180px
 			.container
 				&_logo
 					height: 180px
@@ -192,9 +195,6 @@
 					font-size: 0pt
 					transition: all 2s ease
 	.article
-		width: 544px
-		&_list, &_menu
-			width: 544px
 		@for $i from 1 through $countarticle
 			&_img_#{$i}{width: 220px
 			height: 180px}
@@ -347,6 +347,8 @@
 				font-size: 12pt		
 	.main_container
 		.container
+			&_height
+				height: 150px
 			&_logo, &_general, &_general_5, &_general_6
 				width: 460px
 			&_logo, &_general_5, &_general_6
@@ -426,6 +428,8 @@
 							transition: box-shadow 1.5s ease 1.8s
 							box-shadow: 0px 0px 15px 8px rgba(255,86,81,0.9)
 		&.general_five
+			.container_height
+				height: 180px
 			.container
 				&_logo
 					height: 180px
@@ -455,6 +459,8 @@
 					transition: all 2s ease	2s
 					padding-top: 30px
 		&.general_five_no
+			.container_height
+				height: 150px
 			.container
 				&_logo
 					height: 150px
@@ -481,10 +487,8 @@
 					font-size: 0pt
 					transition: all 2s ease
 	.article
-		width: 460px
 		padding: 15px
 		&_list, &_menu
-			width: 460px
 			padding: 10px
 		&_menu
 			font-size: 8.5pt
@@ -612,9 +616,7 @@
 					font-size: 10.2pt
 				&_1_descr{font-size: 7pt}
 	.article
-		width: 390px
 		&_list, &_menu
-			width: 390px
 			padding: 15px
 		@for $i from 1 through $countarticle
 			&_img_#{$i}{width: 140px
@@ -719,9 +721,6 @@
 				&_3_descr
 					font-size: 9pt
 	.article
-		width: 350px
-		&_list, &_menu
-			width: 350px
 		&_menu
 			a
 				font-size: 7.5pt
@@ -783,6 +782,8 @@
 				font-size: 8pt		
 	.main_container
 		.container
+			&_height
+				height: 130px
 			&_logo, &_general, &_general_5, &_general_6
 				width: 300px
 				height: 130px
@@ -842,6 +843,8 @@
 					font-size: 22pt
 					padding-top: 38px
 		&.general_five_no
+			.container_height
+				height: 130px
 			.container
 				&_logo
 					height: 130px
@@ -857,9 +860,6 @@
 				&_1_descr{font-size: 5pt}
 				&_2_descr{font-size: 7pt}
 	.article
-		width: 300px
-		&_list, &_menu
-			width: 300px
 		@for $i from 1 through $countarticle
 			&_img_#{$i}{width: 100px
 			height: 74px}

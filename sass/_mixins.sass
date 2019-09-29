@@ -29,15 +29,15 @@
 	opacity: 1
 	transition: all 2.5s ease
 =transform_active
-	will-change: transform
-	transition: opacity 2s ease, transform 0s ease
-	transform: scaleY(1)
-	transform-origin: 50% 0
+	opacity: 1
+	transform: scaleY(1)   
+	transform-origin: top
+	transition: opacity 2s ease, transform 0.1s ease
 =transform_active_no
-	will-change: transform
-	transition: opacity 2s ease, transform 1s ease 2s
-	transform: scaleY(0)
-	transform-origin: 50% 0	
+	opacity: 0
+	transform: scaleY(0)   
+	transform-origin: top
+	transition: opacity 1.3s ease, transform 0.1s ease 1s
 	
 
 

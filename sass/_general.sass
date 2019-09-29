@@ -31,26 +31,24 @@ html, body,
 			text-align: center
 			position: absolute
 			margin-top: 60px
-.content
-	width: 100%
-	display: flex
-	justify-content: center
 .container
 	&_general
 		z-index: 1
-		display: inline-block
+		display: block
+		position: relative
+		margin: 20px auto
 		width: 100%
 		margin-top: 20px
 		text-align: justify
 		color: white
+		min-height: 250px
 		@for $i from 1 through 6
 			&_#{$i}{opacity: 0
 			position: absolute
 			width: 971px
-			@if ($i != 4){background-color: $bcg-color
-			box-shadow: 0 0 17px 7px #000
-			padding: 25px
-			min-height: 250px}}
+			height: 100%
+			@if $i!=4 {background-color: $bcg-color
+			box-shadow: 0 0 17px 7px #000}}
 		@for $i from 1 through 3
 			&_img_#{$i}{position: relative
 			display: block
@@ -63,12 +61,15 @@ html, body,
 			height: 100%
 		@for $i from 1 through 6
 			&_text_#{$i}{position: relative}
+			&_#{$i}{@if $i!=4 {display: inline-table
+			padding: 25px}}
 		&_6
-			display: inline-table
+			top: 0px
 		&_5
+			position: relative
 			display: flex
 			justify-content: flex-start
-			min-height: 300px
+			height: 300px
 			.box_shadow_1, .box_shadow_3
 				box-shadow: 0px 0px 15px 12px #000
 			@for $i from 1 through 3
@@ -144,8 +145,7 @@ html, body,
 				&.active
 					z-index: 30
 					opacity: 1
-					height: auto
-					@if ($i != 5) {height: auto
+					@if ($i != 5) {opacity: 1
 					+transform_active}
 					@if ($i == 5){transition: all 2s ease
 					padding-top: 0px
