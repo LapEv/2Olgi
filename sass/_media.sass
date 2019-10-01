@@ -42,8 +42,7 @@
 
 	.article
 		@for $i from 1 through $countarticle
-			&_img_#{$i}{width: 275px
-			height: 208px}
+			&_img_#{$i}{height: 208px}
 	.field-block
 		.field
 			font-size: 13px
@@ -293,7 +292,7 @@
 			height: 100vh
 			width: 80%
 			font-size: 130%
-			padding: 15px 15px
+			padding: 0px 15px
 			background-color: $main-color
 			transition: 0.6s all
 			li
@@ -318,7 +317,7 @@
 		padding-left: 10px
 		overflow: hidden
 		position: absolute
-		width: 100%
+		width: 80%
 	.ham
 		cursor: pointer
 		transition: transform 400ms
@@ -806,9 +805,9 @@
 			&_general
 				padding: 0px
 				margin-top: 15px
-				@for $i from 1 through 3
+				@for $i from 1 through 4
 					&_#{$i}{width: 300px
-					padding: 10px}
+					@if $i!=4 {padding: 10px}}
 					&_img_#{$i}{width: 100px
 					height: 74px
 					margin-right: 10px}
@@ -818,6 +817,8 @@
 				&_4
 					a
 						font-size: 7.5pt
+					.article_list, .article_menu, .article
+						padding: 10px
 					.article_menu
 						a
 							font-size: 6.5pt
