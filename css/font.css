@@ -1,9 +1,8 @@
-  @font-face {
-    font-family: LogoFonts12;
-    src: url(/fonts/12.otf);
-  }
+@font-face {
+  font-family: LogoFonts12;
+  src: url(/fonts/12.otf);
+}
 @font-face {
   font-family: Jura;
   src: url('/fonts/Jura-Bold.ttf');
 }
-

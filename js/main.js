@@ -347,11 +347,6 @@ $(document).ready(()=>{
                 }
                 if ((index >= length.menu+2 && index <= (length.menu+2)+length.article-1) ||
                  (location == articles.last_hash)) {
-                    // if (location == articles.last_hash){
-                    //     if (menu.ChangeActive('active','active_no',0)){
-                    //        timeoutChange = 2000;
-                    //     }
-                    // }
                     articles.ChangeActive('active','active_no',0);
                     if (menu.ChangeActive('active','active_no',0)){
                         timeoutChange = 2000;
@@ -475,6 +470,7 @@ $(document).ready(()=>{
         if (scl_app == 'share') {return(false);}
         if (scl_app == 'feedback') {return(true);}
         if (device.indexOf('desktop') > -1) {
+            if (scl_app == 'instagram:') {link = '//www.instagram.com/lapkina6416/';}
             window.open(scl_https+link, 'width=800,height=300,toolbar=0,status=0'); return(false);
         } else {
             if (scl_app == 'fb') {link = '//profile/100014775069349';}
@@ -519,10 +515,11 @@ $(document).ready(()=>{
             window.open(scl_app+link, 'width=800,height=600,toolbar=0,status=0'); return(false);
         }
     });
+
     $('.ham').on('click', function(){
         document.querySelector('.ham').classList.toggle('active');
         $('.menu').toggleClass('menu_active');
-   });
+    });
 
     $(document).click( function(event){
         if ($('.footer_share').hasClass('active')){
