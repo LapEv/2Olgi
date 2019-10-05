@@ -101,20 +101,28 @@ const menu = {
     set classActive(value) {
         this._classActive = value;
     },
-    ChangeActive: function (className,newClassName,index,timeoutChange){
+    ChangeActive: function (className,newClassName,index,timeoutChange, activeArticle){
         if (index > 0){ // for change to active status
             setTimeout(()=> { // timeout for contacts out
                 if ($(this.class[index]).hasClass(className)){
                     $(this.class[index]).removeClass(className);
                     articles.ChangeActiveClass(articles.classActive,active = false);
                     if (this.class[index] == '.container_general_4'){
-                        articles.ChangeActiveClass('.article_list',active=true);
-                    }
-                    $(this.class[index]).addClass(newClassName);
-                    this.classActive = this.class[index];
+                        $(this.class[index]).addClass(newClassName);
+                        this.classActive = this.class[index];
+                        if (activeArticle == false){
+                            articles.ChangeActiveClass('.article_list',active=true);
+                            document.title = this.title[index];
+                            WorkFunction.FooterCorrect(this.class[index],800);
+                            return;
+                        }
+                    } else {
+                        $(this.class[index]).addClass(newClassName);
+                        this.classActive = this.class[index];    
+                        document.title = this.title[index];
+                        WorkFunction.FooterCorrect(this.class[index],800);
                     } 
-                document.title = this.title[index];
-                WorkFunction.FooterCorrect(this.class[index],800);
+                }
             },timeoutChange);
             if (this.class[index] == '.container_general_5'){
                 if ($('.main_container').hasClass('general_five_no')){
@@ -310,7 +318,7 @@ $(document).ready(()=>{
 
     let device = Device();
     
-    $('.cross').on('click', function(){
+    $('.cross a').on('click', function(){
         if ($('.cross a').attr('href') == '#feedbackclose'){
             history.back();
             $('.cross a').attr('href',window.location.hash);
@@ -336,25 +344,28 @@ $(document).ready(()=>{
     function ChangeLocation(location){
         $('a').each(function(index){
             if ($(this).attr('href') == location){
-                let timeoutChange = 0;
+                let timeoutChange = 0,
+                    activeArticle = false;
                 if (index < length.menu) {
                     menu.mobileVersion();
-                    if (menu.ChangeActive('active','active_no',0))
+                    if (menu.ChangeActive('active','active_no',0,activeArticle))
                        {timeoutChange = 2000;}
-                    menu.ChangeActive('active_no','active',index+1,timeoutChange);
+                    menu.ChangeActive('active_no','active',index+1,timeoutChange,activeArticle);
                     WorkFunction.ScrlTop();
                     WorkFunction.Cross();
+                    return false;
                 }
                 if ((index >= length.menu+2 && index <= (length.menu+2)+length.article-1) ||
                  (location == articles.last_hash)) {
                     articles.ChangeActive('active','active_no',0);
-                    if (menu.ChangeActive('active','active_no',0)){
+                    if (menu.ChangeActive('active','active_no',0,activeArticle = true)){
                         timeoutChange = 2000;
                     }                    
-                    menu.ChangeActive('active_no','active',4,timeoutChange);
+                    menu.ChangeActive('active_no','active',4,timeoutChange,activeArticle = true);
                     articles.ChangeActive('active_no','active',index+1-(length.menu+2),timeoutChange);
                     WorkFunction.ScrlTop();
                     WorkFunction.Cross();
+                    return false;
                 }
                 if (location == '#feedback2Olgi'){
                     let timeoutChange = 0;
@@ -363,6 +374,7 @@ $(document).ready(()=>{
                     menu.ChangeActive('active_no','active',length.menu+1,timeoutChange);
                     WorkFunction.ScrlTop();
                     // WorkFunction.Cross();
+                    return false;
                 }
                 return false;
             }
@@ -523,7 +535,7 @@ $(document).ready(()=>{
 
     $(document).click( function(event){
         if ($('.footer_share').hasClass('active')){
-            if( $(event.target).closest(".share").length) return;
+            if( $(event.target).is(".bubble")) return;
             $('.footer_share').addClass('active_no');
             $('.footer_share').removeClass('active');
             return;
@@ -543,5 +555,4 @@ $(document).ready(()=>{
         }
         event.stopPropagation();
     });
-
 });
